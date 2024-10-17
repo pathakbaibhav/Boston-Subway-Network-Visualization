@@ -1,0 +1,5 @@
+# Handle text files automatically (LF on Unix systems like macOS)
+* text=auto
+
+# Ensure CSV files always use LF line endings
+*.csv text eol=lf
