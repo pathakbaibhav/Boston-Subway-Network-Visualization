@@ -1,0 +1,13 @@
+
+Instructions to run the scripts:
+
+1. Install BeautifulSoup library (if not already installed):
+   pip install beautifulsoup4
+
+2. The data.html file should be in the same folder as the scripts.
+
+3. Run the scripts:
+   python stations.py
+   python connections.py
+
+After running the scripts, you will find two CSV files, 'stations.csv' and 'connections.csv', in the current directory.

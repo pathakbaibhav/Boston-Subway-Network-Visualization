@@ -1,0 +1,122 @@
+From,To,Minutes,Color
+Alewife,Davis,3,red
+Davis,Porter Square,3,red
+Porter Square,Harvard Square,3,red
+Harvard Square,Central Square,3.5,red
+Central Square,Kendall/MIT,3.5,red
+Kendall/MIT,Charles/MGH,2,red
+Charles/MGH,Park Street,2,red
+Park Street,Downtown Crossing,1.5,red
+Downtown Crossing,South Station,1.5,red
+South Station,Broadway,2.5,red
+Broadway,Andrew,2.5,red
+Andrew,JFK/UMass,2,red
+JFK/UMass,Savin Hill,2.5,red
+Savin Hill,Fields Corner,2.5,red
+Fields Corner,Shawmut,2,red
+Shawmut,Ashmont,2,red
+Ashmont,Cedar Grove,1.5,red
+Cedar Grove,Butler,1.5,red
+Butler,Milton,1.5,red
+Milton,Central Avenue,1.5,red
+Central Avenue,Valley Road,1.5,red
+Valley Road,Capen Street,1.5,red
+Capen Street,Mattapan,1,red
+JFK/UMass,North Quincy,9,red
+North Quincy,Wollaston,2.5,red
+Wollaston,Quincy Center,2.5,red
+Quincy Center,Quincy Adams,3,red
+Quincy Adams,Braintree,3,red
+Oak Grove,Malden Center,2,orange
+Malden Center,Wellington,2,orange
+Wellington,Sullivan Square,2,orange
+Sullivan Square,Community College,2,orange
+Community College,North Station,2,orange
+Haymarket,State,2,orange
+State,Downtown Crossing,2,orange
+Downtown Crossing,Chinatown,2,orange
+Chinatown,New England Medical Center,2,orange
+New England Medical Center,Back Bay,2,orange
+Back Bay,Massachusetts Avenue,2,orange
+Massachusetts Avenue,Ruggles,2,orange
+Ruggles,Roxbury Crossing,2,orange
+Roxbury Crossing,Jackson Square,2,orange
+Jackson Square,Stony Brook,2,orange
+Stony Brook,Green Street,2,orange
+Green Street,Forest Hills,2,orange
+Lechmere,Science Park,2,green
+Science Park,North Station,2,green
+North Station,Haymarket,2,green
+Haymarket,Government Center,2,green
+Government Center,Park Street,2,green
+Park Street,Boylston,2,green
+Boylston,Arlington,2,green
+Arlington,Copley,2,green
+Copley,Hynes Convention Center,2,green
+Hynes Convention Center,Kenmore,2,green
+Kenmore,Blandford Street,2,green
+Blandford Street,Boston University East,2,green
+Boston University East,Boston University Central,2,green
+Boston University Central,Boston University West,2,green
+Boston University West,St. Paul Street (1),2,green
+St. Paul Street (1),Pleasant Street,2,green
+Pleasant Street,Babcock Street,2,green
+Babcock Street,Packards Corner,2,green
+Packards Corner,Harvard Avenue,2,green
+Harvard Avenue,Griggs Street/Long Avenue,2,green
+Griggs Street/Long Avenue,Allston Street,2,green
+Allston Street,Warren Street,2,green
+Warren Street,Washington Street,2,green
+Washington Street,Sutherland Street,2,green
+Sutherland Street,Chiswick Road,2,green
+Chiswick Road,Chestnut Hill Avenue,2,green
+Chestnut Hill Avenue,South Street,2,green
+South Street,Boston College,2,green
+Kenmore,St. Marys Street,2,green
+St. Marys Street,Hawes Street,2,green
+Hawes Street,Kent Street,2,green
+Kent Street,St. Paul Street (2),2,green
+St. Paul Street (2),Coolidge Corner,2,green
+Coolidge Corner,Summit Avenue,2,green
+Summit Avenue,Brandon Hall,2,green
+Brandon Hall,Fairbanks,2,green
+Fairbanks,Washington Square,2,green
+Washington Square,Tappan Street,2,green
+Tappan Street,Dean Road,2,green
+Dean Road,Englewood Avenue,2,green
+Englewood Avenue,Cleveland Circle,2,green
+Kenmore,Fenway,2,green
+Fenway,Longwood,2,green
+Longwood,Brookline Village,2,green
+Brookline Village,Brookline Hills,2,green
+Brookline Hills,Beaconsfield,2,green
+Beaconsfield,Reservoir,2,green
+Reservoir,Chestnut Hill,2,green
+Chestnut Hill,Newton Center,2,green
+Newton Center,Newton Highlands,2,green
+Newton Highlands,Eliot,2,green
+Eliot,Waban,2,green
+Waban,Woodland,2,green
+Woodland,Riverside,2,green
+Copley,Prudential,2,green
+Prudential,Symphony,2,green
+Symphony,Northeastern University,2,green
+Northeastern University,Museum of Fine Arts,2,green
+Museum of Fine Arts,Longwood Medical Area,2,green
+Longwood Medical Area,Brigham Circle,2,green
+Brigham Circle,Fenwood Street,2,green
+Fenwood Street,Mission Park,2,green
+Mission Park,Riverway,2,green
+Riverway,Back of the Hill,2,green
+Back of the Hill,Heath Street,2,green
+Wonderland,Revere Beach,1,blue
+Revere Beach,Beachmont,1,blue
+Beachmont,Suffolk Downs,1,blue
+Suffolk Downs,Orient Heights,1,blue
+Orient Heights,Wood Island,1,blue
+Wood Island,Airport,1,blue
+Airport,Maverick,1,blue
+Maverick,Aquarium,1,blue
+Aquarium,State,1,blue
+State,Government Center,1,blue
+Government Center,Bowdoin,1,blue
