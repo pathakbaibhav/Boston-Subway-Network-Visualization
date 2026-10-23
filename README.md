@@ -1,9 +1,12 @@
 # Boston Subway Network Optimization & Visualization
 
 A route-optimization backend and live visualization for Boston's MBTA subway network (the "T").
-Stations are modeled as graph nodes and track segments as weighted edges (travel minutes); shortest
-routes are computed with Dijkstra's algorithm and served over a REST API, and a Processing sketch
+Stations are modeled as graph nodes and track segments as weighted edges (travel minutes). Shortest
+routes are computed with Dijkstra's algorithm and served over a REST API. A Processing sketch
 renders the network with color-coded lines and live route changes.
+
+**▶ Live demo: <https://pathakbaibhav.github.io/Boston-Subway-Network-Visualization/>**
+The web version runs entirely in the browser and is rerouted live around MBTA service changes.
 
 > Originally built as Homework 4 for **EECE 5642: Data Visualization** at Northeastern University
 > (Spring 2024). The original assignment code is preserved in [`legacy/`](legacy/) and is being
@@ -22,7 +25,8 @@ renders the network with color-coded lines and live route changes.
 | 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ✅ Done |
 | 3 | REST API (FastAPI): stations, network, routes, live alerts | ✅ Done |
 | 4 | Visualization in Processing (py5): color-coded lines, live route updates | ✅ Done |
-| 5 | Documentation, measured benchmarks, cleanup of `legacy/` | ⏳ Next |
+| 5 | Website on GitHub Pages: p5.js map, in-browser routing, live alerts, CI | ✅ Done |
+| 6 | Documentation, cleanup of `legacy/` | ⏳ Next |
 
 ## Data Pipeline
 
@@ -189,6 +193,44 @@ The map's data, geometry, hit-testing and live-update logic live in plain Python
 (`client.py`, `model.py`, `feed.py`), so they are unit-tested without starting Java. Only
 `sketch.py` uses py5.
 
+## Website (GitHub Pages)
+
+GitHub Pages serves only static files, so the website brings the backend's work into the browser.
+
+```
+ GitHub Actions (every 30 min) ──► Python pipeline: MBTA API + BeautifulSoup scraper
+                                     └─► data/alerts.json, data/network.json ─► GitHub Pages
+ Browser ──► p5.js map + JavaScript routing engine
+          ├─► data/*.json from the site (network, scraped alerts)
+          └─► MBTA V3 API directly, every 60 s (live alerts, no key needed)
+```
+
+- **Map:** `web/js/app.js` is a [p5.js](https://p5js.org/) sketch (Processing for the web) with the
+  same drawing, interaction and animation as the desktop map. The HTML side panel has station
+  pickers, a "plan for later" time picker (Boston time) and works on phones.
+- **Routing:** `web/js/graph.js` ports the graph engine: adjacency list, (station, route) nodes,
+  heap Dijkstra, closures and LRU cache. `web/js/alerts.js` ports alert normalization and the
+  alert-to-closure rules.
+- **Same answers as Python:** `scripts/export_web_fixtures.py` exports the Python engine's results.
+  `web/tests` then checks that the JavaScript engine matches it on **all 7,750 station pairs** under
+  normal service, today's closures and a planned suspension, along with the closure sets and alert
+  normalization. A pytest test fails if the fixture falls out of date.
+- **Live alerts:** the browser polls the MBTA API every minute and merges in the scraped-only
+  alerts published by the Actions pipeline. If the API is unreachable, it falls back to the
+  published snapshot.
+- **Shareable links:** e.g. `?from=Alewife&to=Heath%20Street&at=2026-11-08T12:00`.
+
+Deployment is `.github/workflows/pages.yml`. It runs on every push to `main` and every 30 minutes,
+so the published alerts stay fresh. `.github/workflows/ci.yml` runs the Python and JavaScript tests
+on every push and pull request.
+
+Preview locally:
+
+```bash
+python -m scripts.build_site
+python -m http.server -d _site 8080      # open http://localhost:8080
+```
+
 ## Tech Stack
 
 - **Python 3.10+**
@@ -196,7 +238,9 @@ The map's data, geometry, hit-testing and live-update logic live in plain Python
 - **MBTA V3 API**: live alerts and service changes
 - **FastAPI** + **Uvicorn**: REST API
 - **py5**: Processing for Python (needs a Java 17+ runtime; you don't write any Java)
-- **pytest**: tests
+- **p5.js** + vanilla JavaScript (ES modules): web map and in-browser routing
+- **GitHub Actions** + **GitHub Pages**: scheduled data pipeline, tests and hosting
+- **pytest** + **node:test**: tests
 
 ## Project Structure
 
@@ -220,6 +264,10 @@ The map's data, geometry, hit-testing and live-update logic live in plain Python
 │   ├── feed.py         # Live polling of the API
 │   ├── client.py       # REST client
 │   └── __main__.py     # CLI: python -m viz.subway_map
+├── web/                # GitHub Pages site (p5.js map + JS routing engine)
+│   ├── js/             # app.js (map/UI), graph.js, alerts.js, geo.js
+│   └── tests/          # node --test, checked against Python fixtures
+├── .github/workflows/  # ci.yml (tests), pages.yml (alerts pipeline + deploy)
 ├── docs/               # Screenshots
 ├── data/
 │   ├── raw/            # Raw API/HTML responses (generated, not tracked)
@@ -295,11 +343,13 @@ python -m viz.subway_map
 ### 6. Run the tests
 
 ```bash
-pytest
+pytest                                  # Python
+node --test web/tests/*.test.mjs        # browser engine vs. Python fixtures (Node 18+)
 ```
 
 Tests run offline against fakes and fixtures. They don't call the MBTA API or mbta.com, and they
-don't need Java.
+don't need Java. After changing the Python engine, re-export the browser fixtures with
+`python -m scripts.export_web_fixtures`.
 
 ## License
 

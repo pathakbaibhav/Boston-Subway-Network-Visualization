@@ -1,0 +1,55 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/30 * * * *" # refresh published alerts; GitHub may delay scheduled runs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install pipeline dependencies
+        run: pip install requests beautifulsoup4 python-dotenv
+
+      - name: Fetch alerts (MBTA V3 API + mbta.com scraper)
+        env:
+          MBTA_API_KEY: ${{ secrets.MBTA_API_KEY }} # optional; the pipeline works keyless
+        run: |
+          python -m transit.pipeline alerts || \
+            echo "::warning::Alert refresh failed; the site still loads live alerts in the browser"
+
+      - name: Build site
+        run: python -m scripts.build_site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
