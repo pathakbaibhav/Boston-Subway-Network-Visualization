@@ -17,8 +17,8 @@ renders the network with color-coded lines and live route changes.
 |---|---|---|
 | 0 | Repo restructure, tooling, project skeleton | ✅ Done |
 | 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ✅ Done |
-| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ⏳ Next |
-| 3 | REST API (FastAPI): stations, network, routes, live alerts | Planned |
+| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ✅ Done |
+| 3 | REST API (FastAPI): stations, network, routes, live alerts | ⏳ Next |
 | 4 | Visualization in Processing (py5): color-coded lines, live route updates | Planned |
 | 5 | Documentation, measured benchmarks, cleanup of `legacy/` | Planned |
 
@@ -63,6 +63,40 @@ python -m transit.pipeline network    # network only (optionally --date YYYY-MM-
 python -m transit.pipeline alerts     # refresh alerts against the existing network
 ```
 
+## Graph Engine
+
+`transit/graph.py` turns the network into a graph and answers shortest-route queries.
+
+- **Adjacency list, route-level nodes.** Each node is a (station, route) pair, and each station's
+  route nodes are joined by transfer edges costing `TRANSFER_MINUTES` (4 min, approximating the
+  wait for a connecting train). Fastest routes therefore account for changing trains, and each
+  route comes back as per-line legs: 155 nodes and 202 edges for the full network.
+- **Dijkstra with a binary heap** (`heapq`, lazy deletion): O(E log V) per query, with early exit
+  once the destination is reached. A single-source variant builds the full **all-pairs table for
+  all 7,750 station pairs** in about 15 ms.
+- **Live closures.** `set_closures()` marks stations as skipped (trains pass through, but no
+  boarding or transfers) and segments as out of service (no riding). Phase 3 connects this to the
+  live alerts.
+- **LRU route cache.** `RoutePlanner` caches compact results (total minutes plus a tuple of node
+  indices) instead of full route objects, and clears automatically when closures change the graph.
+
+### Benchmarks
+
+Measured with `python -m scripts.benchmark --write` against the original homework implementation
+(a dense adjacency matrix and O(V²) Dijkstra, ported to `scripts/baseline_matrix.py`). Full results
+are in **[BENCHMARKS.md](BENCHMARKS.md)**.
+
+| | Original (matrix) | Now (adjacency list) |
+|---|---|---|
+| Graph memory, same information | 264.5 KB | 27.9 KB (**−89.5%**) |
+| Graph memory, full route-level graph | 264.5 KB | 100.1 KB (**−62.2%**) |
+| All 7,750 station pairs | 3.65 s | 0.40 s (**9×** faster) |
+| Repeated queries (Zipf workload) with LRU cache | n/a | 76.9% hit rate, 2.9× faster |
+| 2,000-station synthetic network: memory / query | 61.4 MB / 114 ms | 1.4 MB / 0.54 ms |
+
+Both implementations return identical travel times on all 7,750 pairs (with the transfer penalty
+set to 0, matching the original model).
+
 ## Tech Stack
 
 - **Python 3.10+**
@@ -81,13 +115,16 @@ python -m transit.pipeline alerts     # refresh alerts against the existing netw
 │   ├── mbta_api.py     # MBTA V3 REST client with rate-limit/5xx retries
 │   ├── scraper.py      # BeautifulSoup alerts scraper and free-text parsing
 │   ├── storage.py      # JSON/CSV readers and writers
-│   └── pipeline.py     # Builds network + alerts (CLI entry point)
+│   ├── pipeline.py     # Builds network + alerts (CLI entry point)
+│   └── graph.py        # Adjacency-list graph, heap Dijkstra, closures, LRU route cache
 ├── api/                # FastAPI service
 ├── viz/subway_map/     # py5 (Processing) sketch
 ├── data/
 │   ├── raw/            # Raw API/HTML responses (generated, not tracked)
 │   └── processed/      # Normalized network snapshot (tracked) and alerts (not tracked)
-├── scripts/            # Benchmarks and utility scripts
+├── scripts/
+│   ├── benchmark.py    # Memory/speed/cache benchmarks → BENCHMARKS.md
+│   └── baseline_matrix.py  # Original HW4 matrix Dijkstra, kept as the benchmark baseline
 ├── tests/              # pytest suite
 ├── legacy/             # Original EECE 5642 HW4 code (to be removed)
 ├── requirements.txt

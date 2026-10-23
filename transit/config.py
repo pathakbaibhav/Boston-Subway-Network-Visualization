@@ -28,6 +28,12 @@ SCHEDULE_WINDOW = ("10:00", "14:00")
 # Floor for a segment's travel time; timetables are minute-resolution, so some hops read as 0.
 MIN_SEGMENT_MINUTES = 0.5
 
+# Cost of changing trains at a station, approximating the average wait for the connecting train.
+TRANSFER_MINUTES = 4.0
+
+# Shortest routes kept in the LRU route cache.
+ROUTE_CACHE_SIZE = 2048
+
 
 def mbta_api_key() -> str | None:
     key = os.getenv("MBTA_API_KEY", "").strip()
