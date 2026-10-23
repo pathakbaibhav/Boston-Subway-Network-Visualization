@@ -7,3 +7,7 @@ requires-python = ">=3.10"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+filterwarnings = [
+    # Starlette's TestClient still uses httpx; harmless for these tests.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated",
+]
