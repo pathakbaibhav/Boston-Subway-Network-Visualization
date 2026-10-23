@@ -20,3 +20,6 @@ data/raw/*
 
 # Live alerts change constantly; the network snapshot in data/processed is committed
 data/processed/alerts.*
+
+# Screenshots saved from the map with the S key
+subway-map-*.png

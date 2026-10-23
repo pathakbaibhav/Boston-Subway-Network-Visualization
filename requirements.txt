@@ -9,6 +9,7 @@ uvicorn[standard]>=0.29
 
 # Visualization (Processing via Python; needs a Java 17+ runtime)
 py5>=0.10
+install-jdk>=1.1  # one-time Java 17 install for py5, see README
 
 # Testing
 pytest>=8.0

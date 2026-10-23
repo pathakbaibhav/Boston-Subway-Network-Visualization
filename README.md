@@ -9,6 +9,8 @@ renders the network with color-coded lines and live route changes.
 > (Spring 2024). The original assignment code is preserved in [`legacy/`](legacy/) and is being
 > rebuilt into a full backend + visualization.
 
+![Live subway map with a planned route](docs/live-route.png)
+
 ---
 
 ## Roadmap
@@ -19,8 +21,8 @@ renders the network with color-coded lines and live route changes.
 | 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ✅ Done |
 | 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ✅ Done |
 | 3 | REST API (FastAPI): stations, network, routes, live alerts | ✅ Done |
-| 4 | Visualization in Processing (py5): color-coded lines, live route updates | ⏳ Next |
-| 5 | Documentation, measured benchmarks, cleanup of `legacy/` | Planned |
+| 4 | Visualization in Processing (py5): color-coded lines, live route updates | ✅ Done |
+| 5 | Documentation, measured benchmarks, cleanup of `legacy/` | ⏳ Next |
 
 ## Data Pipeline
 
@@ -146,6 +148,47 @@ curl "localhost:8000/route?from=Haymarket&to=North%20Station&at=2026-11-08T12:00
 # → rides the Orange Line, because the Green Line is suspended between these stations that day
 ```
 
+## Live Map (Processing)
+
+`viz/subway_map/` is a [Processing](https://processing.org/) sketch written in Python with
+[py5](https://py5coding.org/), Processing's core engine driven from Python. It gets all of its data
+from the REST API.
+
+- **Network:** drawn from real station coordinates in official MBTA line colors. Lines that share
+  track, like Orange and Green between Haymarket and North Station, are drawn side by side.
+- **Planning a trip:** click two stations. The map zooms to the route, dims everything else and
+  draws each leg in its line's color, with a pulse traveling along the route.
+- **Side panel:** shows the legs, total minutes, transfers, and how the trip compares with normal
+  service.
+- **Live updates:** a background thread polls `/health`. When the closure version changes, the map
+  reloads closures, re-plans the selected route and shows a notice. Closed stations are marked ✗
+  and closed track is dashed.
+- **Planned view:** `--at` shows the network as planned for a future time.
+- **Controls:** scroll to zoom, drag to pan, `C` clear, `R` refresh alerts now, `0` reset view,
+  `S` save a screenshot.
+
+```bash
+uvicorn api.main:app                                    # terminal 1: the API
+python -m viz.subway_map                                # terminal 2: the map
+python -m viz.subway_map --route Alewife "Heath Street" # open with a trip selected
+python -m viz.subway_map --at 2026-11-08T12:00          # network as planned for that time
+```
+
+**Planned disruption.** During the November Green Line suspension, Medford/Tufts → Park Street is
+rerouted via the Orange and Red Lines:
+
+![Route rerouted around a planned Green Line suspension](docs/planned-disruption.png)
+
+**Live service change.** The map is open on Alewife → South Station when a suspension arrives
+(a simulated alert, labeled "demo"). Within one poll, the route is rerouted and the change is
+announced:
+
+![Map rerouting live after a simulated Red Line suspension](docs/live-update.png)
+
+The map's data, geometry, hit-testing and live-update logic live in plain Python modules
+(`client.py`, `model.py`, `feed.py`), so they are unit-tested without starting Java. Only
+`sketch.py` uses py5.
+
 ## Tech Stack
 
 - **Python 3.10+**
@@ -171,7 +214,13 @@ curl "localhost:8000/route?from=Haymarket&to=North%20Station&at=2026-11-08T12:00
 │   ├── main.py         # FastAPI app, endpoints, background alert refresh
 │   ├── state.py        # Live graph, planners, alerts, station lookup
 │   └── schemas.py      # Pydantic response models (OpenAPI docs)
-├── viz/subway_map/     # py5 (Processing) sketch
+├── viz/subway_map/
+│   ├── sketch.py       # py5 (Processing) sketch: drawing and interaction
+│   ├── model.py        # Projection, zoom/pan, geometry, hit-testing
+│   ├── feed.py         # Live polling of the API
+│   ├── client.py       # REST client
+│   └── __main__.py     # CLI: python -m viz.subway_map
+├── docs/               # Screenshots
 ├── data/
 │   ├── raw/            # Raw API/HTML responses (generated, not tracked)
 │   └── processed/      # Normalized network snapshot (tracked) and alerts (not tracked)
@@ -228,13 +277,29 @@ live alerts.
 uvicorn api.main:app --reload
 ```
 
-### 5. Run the tests
+### 5. Open the live map
+
+py5 needs a Java 17+ runtime. If you don't have one, install it once into `~/.jre`. This leaves
+any system Java untouched, and py5 finds it automatically:
+
+```bash
+python -c "import jdk; jdk.install('17', jre=True)"
+```
+
+Then, with the API running:
+
+```bash
+python -m viz.subway_map
+```
+
+### 6. Run the tests
 
 ```bash
 pytest
 ```
 
-Tests run offline against fakes and fixtures; they don't call the MBTA API or mbta.com.
+Tests run offline against fakes and fixtures. They don't call the MBTA API or mbta.com, and they
+don't need Java.
 
 ## License
 
