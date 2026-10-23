@@ -1,0 +1,9 @@
+[project]
+name = "boston-subway-network"
+version = "0.1.0"
+description = "Route optimization backend and Processing visualization for the Boston MBTA subway network"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
