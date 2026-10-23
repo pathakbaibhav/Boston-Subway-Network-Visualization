@@ -176,7 +176,7 @@ def report(mem, q, cache, scaling, network) -> str:
         f"(service date {network.service_date}). Route-level graph: {q['nodes']} nodes, {q['edges']} edges.",
         "",
         "**Baseline** = the original HW4 implementation (`scripts/baseline_matrix.py`, ported from "
-        "`legacy/`): two dense V×V matrices and O(V²) Dijkstra.",
+        "git tag `hw4-original`): two dense V×V matrices and O(V²) Dijkstra.",
         "",
         "## 1. Graph memory",
         "",
