@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boston Subway Network</title>
+  <meta name="description" content="Fastest routes across Boston's MBTA subway, rerouted live around service changes.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <main class="layout">
+    <section class="map-area">
+      <header class="map-header">
+        <h1>Boston Subway Network</h1>
+        <p id="status" class="status"><span class="dot"></span><span id="status-text">Loading…</span></p>
+      </header>
+      <div id="map" class="map" aria-label="Interactive MBTA subway map"></div>
+      <div class="map-controls">
+        <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+        <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+        <button type="button" id="zoom-reset" aria-label="Reset view">⟲</button>
+      </div>
+      <div id="toast" class="toast" role="status" hidden></div>
+    </section>
+
+    <aside class="panel">
+      <h2>Plan a trip</h2>
+      <p class="hint">Pick stations below or click two stations on the map.</p>
+
+      <form id="trip" class="trip" autocomplete="off">
+        <label>From <input id="from" list="station-list" placeholder="e.g. Alewife"></label>
+        <label>To <input id="to" list="station-list" placeholder="e.g. Heath Street"></label>
+        <datalist id="station-list"></datalist>
+        <div class="row">
+          <button type="button" id="swap">⇅ Swap</button>
+          <button type="button" id="clear">Clear</button>
+        </div>
+        <label>When
+          <select id="when">
+            <option value="now">Now (live)</option>
+            <option value="later">Plan for a later time (Boston time)…</option>
+          </select>
+        </label>
+        <input id="when-time" type="datetime-local" hidden>
+      </form>
+
+      <div id="result" class="result" aria-live="polite"></div>
+
+      <h3>Service changes <span id="changes-count"></span></h3>
+      <ul id="changes" class="changes"></ul>
+
+      <footer class="about">
+        <p>Routes are computed in your browser with Dijkstra's algorithm (binary heap, O(E log V))
+          over a graph of <span id="about-stations">125</span> stations, with a 4-minute penalty for
+          changing trains. Travel times are averaged from MBTA weekday schedules.</p>
+        <p>Alerts: live from the MBTA V3 API every minute, plus alerts scraped from mbta.com by a
+          GitHub Actions pipeline (<span id="about-published">—</span>).</p>
+        <p><a href="https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization">Source on GitHub</a></p>
+      </footer>
+    </aside>
+  </main>
+</body>
+</html>

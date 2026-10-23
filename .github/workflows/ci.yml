@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Python dependencies (py5 skipped; it needs Java and isn't used by tests)
+        run: |
+          grep -vE '^(py5|install-jdk)' requirements.txt > "$RUNNER_TEMP/requirements-ci.txt"
+          pip install -r "$RUNNER_TEMP/requirements-ci.txt"
+
+      - name: Python tests
+        run: pytest
+
+      - name: Browser engine tests (checked against the Python engine)
+        run: node --test web/tests/*.test.mjs
