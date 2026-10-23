@@ -1,96 +1,102 @@
 # Boston Subway Network Optimization & Visualization
 
-A route-optimization backend and live visualization for Boston's MBTA subway network (the "T").
-Stations are modeled as graph nodes and track segments as weighted edges (travel minutes). Shortest
-routes are computed with Dijkstra's algorithm and served over a REST API. A Processing sketch
-renders the network with color-coded lines and live route changes.
+[![CI](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/actions/workflows/ci.yml/badge.svg)](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/actions/workflows/ci.yml)
+[![Deploy site](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/actions/workflows/pages.yml/badge.svg)](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/actions/workflows/pages.yml)
+
+A route-optimization backend and live visualization for Boston's MBTA subway, the "T":
+- The network is modeled as a weighted graph built from real MBTA data.
+- Fastest routes are computed with Dijkstra's algorithm and served over a REST API.
+- The routes are drawn on an interactive Processing map that reroutes live when service changes.
 
 **▶ Live demo: <https://pathakbaibhav.github.io/Boston-Subway-Network-Visualization/>**
-The web version runs entirely in the browser and is rerouted live around MBTA service changes.
-
-> Originally built as Homework 4 for **EECE 5642: Data Visualization** at Northeastern University
-> (Spring 2024). The original assignment code is preserved in [`legacy/`](legacy/) and is being
-> rebuilt into a full backend + visualization.
 
 ![Live subway map with a planned route](docs/live-route.png)
 
----
+## Highlights
 
-## Roadmap
+- **Real data:** 125 stations, 127 track segments and 8 routes, built from the MBTA V3 REST API.
+  Travel times are averaged from 48–238 real scheduled trips per segment.
+- **Graph engine:** an adjacency-list graph with heap-based Dijkstra, O(E log V). It is
+  **9× faster** than the original adjacency-matrix version across all **7,750 station pairs** and
+  uses **62% less graph memory**. An LRU route cache reaches a **77% hit rate** on a realistic
+  workload. See [BENCHMARKS.md](BENCHMARKS.md).
+- **Live service changes:**
+  - A BeautifulSoup scraper of mbta.com is merged with structured API alerts.
+  - Active alerts become closed stations or per-line closed segments, and routes reroute around them.
+  - A planned disruption can be checked ahead of time ("what-if" planning).
+- **REST API:** a FastAPI service with OpenAPI docs and a background alert refresh.
+- **Processing visualization:** a desktop map in [py5](https://py5coding.org/) and a web map in
+  [p5.js](https://p5js.org/). Both have color-coded lines, an animated route, and live rerouting.
+- **One engine in two languages:** the website runs a JavaScript port of the engine, which is
+  tested to match the Python engine on every station pair.
+- **CI and deployment:** 71 Python tests and 13 JavaScript tests run on every push. A scheduled
+  GitHub Actions pipeline publishes fresh alerts to GitHub Pages every 30 minutes.
 
-| Phase | Scope | Status |
-|---|---|---|
-| 0 | Repo restructure, tooling, project skeleton | ✅ Done |
-| 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ✅ Done |
-| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ✅ Done |
-| 3 | REST API (FastAPI): stations, network, routes, live alerts | ✅ Done |
-| 4 | Visualization in Processing (py5): color-coded lines, live route updates | ✅ Done |
-| 5 | Website on GitHub Pages: p5.js map, in-browser routing, live alerts, CI | ✅ Done |
-| 6 | Documentation, cleanup of `legacy/` | ⏳ Next |
+## Architecture
+
+```
+  MBTA V3 API ─┐
+               ├─► transit/pipeline.py ─► network.json (stations, segments, travel times)
+  mbta.com ────┘   (requests, BeautifulSoup)   alerts.json (API + scraped, merged)
+                                │
+                                ▼
+            transit/graph.py + transit/closures.py
+            adjacency list · heap Dijkstra · closures · LRU cache
+                    │                                   │
+                    ▼                                   ▼
+          api/ (FastAPI REST) ──► viz/ (py5)      web/ (GitHub Pages)
+          background alert refresh   desktop map   p5.js map + JS port of the engine,
+                                                   live MBTA alerts polled in the browser
+```
 
 ## Data Pipeline
 
-`transit/pipeline.py` builds two datasets from two independent sources:
-
-```
- MBTA V3 API ──────┬─► routes, canonical stop sequences ─► network topology
- (REST, JSON)      ├─► weekday schedules ─────────────────► travel minutes per segment
-                   └─► alerts (structured) ──┐
-                                              ├─► merged by alert id ─► alerts.json / alerts.csv
- mbta.com/alerts ──► BeautifulSoup ──────────┘
- (HTML)              free-text parsing: effect type + affected stations
-```
+`transit/pipeline.py` builds two datasets from two independent sources.
 
 **Network** (`data/processed/network.json`, plus `stations.csv`, `segments.csv`, `lines.csv`)
-- **125 stations, 127 track segments, 8 routes** (Red, Mattapan, Orange, Blue, Green B/C/D/E).
 - Topology comes from each route's canonical stop sequence. Green Line branches share trunk
   segments, so they are stored once with every route that runs over them.
-- Each segment's travel time is the **mean of real scheduled trips** (10:00–14:00 on a weekday),
-  typically 50–240 trips per segment. Segments with no scheduled trips (e.g. during a shutdown)
-  fall back to later weekdays, then to a distance-based estimate, and are tagged
-  `minutes_source: "estimated"`.
-- The network is validated before writing: unknown stations, duplicate segments, non-positive
+- Each segment's travel time is the **mean of real scheduled trips** (10:00–14:00 on a weekday).
+  Segments with no scheduled trips, e.g. during a shutdown, fall back to later weekdays, then to a
+  distance-based estimate, and are tagged `minutes_source: "estimated"`.
+- The network is validated before writing. Unknown stations, duplicate segments, non-positive
   times, out-of-area coordinates and disconnected stations all fail the build.
 
-**Alerts** (`data/processed/alerts.json`, plus `alerts.csv`; regenerated on demand, not committed)
-- The API provides structured alerts (effect, severity, affected platforms → stations).
-- The public alerts page is scraped with BeautifulSoup as a second source, honoring `robots.txt`.
-  Its free text is parsed into the same schema: effect type from keywords, affected stations by
-  matching station names (handles abbreviations like "Babcock St", ignores direction phrases like
-  "Alewife platform"). This covers alerts the API's route filter misses (elevators, escalators)
-  and keeps alerts available if the API is down.
-- Raw responses from both sources are kept in `data/raw/` for debugging.
-
-Run it:
+**Alerts** (`data/processed/alerts.json`, plus `alerts.csv`)
+- The **MBTA API** provides structured alerts: effect, severity, and affected platforms mapped to
+  stations.
+- The public alerts page on mbta.com is scraped with **BeautifulSoup**, honoring `robots.txt`. Its
+  free text is parsed into the same schema:
+  - The effect type comes from keywords.
+  - Affected stations are found by matching station names. This handles abbreviations like
+    "Babcock St" and ignores direction phrases like "Alewife platform".
+- The two sources are merged by alert id. Scraping adds alerts that the API's route filter misses
+  (elevators, escalators) and keeps alerts available if the API is down.
 
 ```bash
 python -m transit.pipeline all        # network + alerts
-python -m transit.pipeline network    # network only (optionally --date YYYY-MM-DD)
-python -m transit.pipeline alerts     # refresh alerts against the existing network
+python -m transit.pipeline alerts     # refresh alerts only
 ```
 
 ## Graph Engine
 
-`transit/graph.py` turns the network into a graph and answers shortest-route queries.
-
-- **Adjacency list, route-level nodes.** Each node is a (station, route) pair, and each station's
-  route nodes are joined by transfer edges costing `TRANSFER_MINUTES` (4 min, approximating the
-  wait for a connecting train). Fastest routes therefore account for changing trains, and each
-  route comes back as per-line legs: 155 nodes and 202 edges for the full network.
+`transit/graph.py`:
+- **Route-level nodes.** Each node is a (station, route) pair, and transfer edges join a
+  station's route nodes. Changing trains costs 4 minutes (the average wait), so routes come back
+  as per-line legs. The full network is 155 nodes and 202 edges.
 - **Dijkstra with a binary heap** (`heapq`, lazy deletion): O(E log V) per query, with early exit
-  once the destination is reached. A single-source variant builds the full **all-pairs table for
-  all 7,750 station pairs** in about 15 ms.
-- **Live closures.** `set_closures()` marks stations as skipped (trains pass through, but no
-  boarding or transfers) and segments as out of service (no riding). Phase 3 connects this to the
-  live alerts.
-- **LRU route cache.** `RoutePlanner` caches compact results (total minutes plus a tuple of node
-  indices) instead of full route objects, and clears automatically when closures change the graph.
+  at the destination. A single-source variant builds the all-pairs table in about 15 ms.
+- **Closures.** A closed station is passed through but can't be used for boarding or transfers. A
+  closed segment can't be ridden. Closures are per line, so a Green Line suspension leaves the
+  parallel Orange Line segment open.
+- **LRU route cache.** It stores compact results (minutes plus node path) and clears itself when
+  closures change.
 
 ### Benchmarks
 
-Measured with `python -m scripts.benchmark --write` against the original homework implementation
-(a dense adjacency matrix and O(V²) Dijkstra, ported to `scripts/baseline_matrix.py`). Full results
-are in **[BENCHMARKS.md](BENCHMARKS.md)**.
+Measured with `python -m scripts.benchmark --write` against the original homework implementation,
+which used a dense adjacency matrix and O(V²) Dijkstra (ported to `scripts/baseline_matrix.py`).
+Full results are in [BENCHMARKS.md](BENCHMARKS.md).
 
 | | Original (matrix) | Now (adjacency list) |
 |---|---|---|
@@ -100,18 +106,13 @@ are in **[BENCHMARKS.md](BENCHMARKS.md)**.
 | Repeated queries (Zipf workload) with LRU cache | n/a | 76.9% hit rate, 2.9× faster |
 | 2,000-station synthetic network: memory / query | 61.4 MB / 114 ms | 1.4 MB / 0.54 ms |
 
-Both implementations return identical travel times on all 7,750 pairs (with the transfer penalty
-set to 0, matching the original model).
+Both implementations return identical travel times on all 7,750 pairs when the transfer penalty
+is set to 0, which matches the original model.
 
 ## REST API
 
-A FastAPI service (`api/`) serves the network and live routes. Run it:
-
-```bash
-uvicorn api.main:app --reload
-```
-
-Interactive docs are at <http://127.0.0.1:8000/docs>.
+`api/` is a FastAPI service. Run it with `uvicorn api.main:app` and open the docs at
+<http://127.0.0.1:8000/docs>.
 
 | Endpoint | Description |
 |---|---|
@@ -119,237 +120,151 @@ Interactive docs are at <http://127.0.0.1:8000/docs>.
 | `GET /lines` | Lines with official colors |
 | `GET /stations?line=&q=` | Stations, filterable by line group and name |
 | `GET /stations/{station}` | One station (id or name) with neighbors and active alerts |
-| `GET /network` | Full graph for drawing: stations with coordinates, segments with `closed` flags |
-| `GET /route?from=&to=&at=` | Fastest route with per-line legs, transfers and disruption info |
+| `GET /network` | Full graph for drawing, with `closed` flags |
+| `GET /route?from=&to=&at=` | Fastest route with legs, transfers and disruption info |
 | `GET /alerts?active=&effect=&line=` | Merged API and scraped alerts |
-| `GET /closures?at=` | Stations and segments currently closed, and the alerts behind them |
-| `POST /alerts/refresh` | Fetch alerts now instead of waiting for the next cycle |
+| `GET /closures?at=` | Closed stations and segments, and the alerts behind them |
+| `POST /alerts/refresh` | Fetch alerts now |
 
-**Live service changes.** A background task re-fetches alerts every `ALERTS_REFRESH_SECONDS`
-(default 120; `0` disables it). `transit/closures.py` turns active alerts into graph closures:
-station closures mean trains skip the station, and suspensions or shuttles close the segments
-between the named stations, on the affected line only. Each change bumps a version number and
-clears the route cache, so the next request reflects the new state.
-
-```bash
-curl "localhost:8000/route?from=Kenmore&to=Park%20Street"
-```
-
-Stations can be given by id (`place-kencl`) or name, case-insensitive. A typo returns `404` with
-suggestions. Every route response includes:
-
-- `disrupted`: whether live closures changed the route.
-- `normal_minutes`: the same trip under normal service.
-- `alert_ids`: the alerts responsible for the change.
-
-If closures make the trip impossible by train, the API returns `409` with the blocking alerts.
-
-**What-if planning.** Add `at=` to plan for a future time against scheduled disruptions, e.g. a
-planned weekend suspension:
+- A background task refreshes alerts every `ALERTS_REFRESH_SECONDS` (default 120).
+- Every route response reports:
+  - `disrupted`: whether live closures changed the route;
+  - `normal_minutes`: the same trip under normal service;
+  - `alert_ids`: the alerts responsible.
+- If no train route exists, the API returns `409` with the blocking alerts.
+- Stations can be given by id or by name, case-insensitive. Typos get suggestions.
+- `at=` plans against disruptions scheduled for that time (Boston time if no offset):
 
 ```bash
 curl "localhost:8000/route?from=Haymarket&to=North%20Station&at=2026-11-08T12:00"
 # → rides the Orange Line, because the Green Line is suspended between these stations that day
 ```
 
-## Live Map (Processing)
+## Live Map (Processing, desktop)
 
-`viz/subway_map/` is a [Processing](https://processing.org/) sketch written in Python with
-[py5](https://py5coding.org/), Processing's core engine driven from Python. It gets all of its data
-from the REST API.
+`viz/subway_map/` is a Processing sketch written in Python with py5, and gets all of its data from
+the REST API:
+- Click two stations. The map zooms to the trip, dims everything else, colors each leg by its line
+  and animates a pulse along the route.
+- A side panel lists the legs, transfers, and the change from normal service.
+- A background thread checks the API's closure version. When it changes, the map reloads closures,
+  re-plans the trip and announces the change.
 
-- **Network:** drawn from real station coordinates in official MBTA line colors. Lines that share
-  track, like Orange and Green between Haymarket and North Station, are drawn side by side.
-- **Planning a trip:** click two stations. The map zooms to the route, dims everything else and
-  draws each leg in its line's color, with a pulse traveling along the route.
-- **Side panel:** shows the legs, total minutes, transfers, and how the trip compares with normal
-  service.
-- **Live updates:** a background thread polls `/health`. When the closure version changes, the map
-  reloads closures, re-plans the selected route and shows a notice. Closed stations are marked ✗
-  and closed track is dashed.
-- **Planned view:** `--at` shows the network as planned for a future time.
-- **Controls:** scroll to zoom, drag to pan, `C` clear, `R` refresh alerts now, `0` reset view,
-  `S` save a screenshot.
-
-```bash
-uvicorn api.main:app                                    # terminal 1: the API
-python -m viz.subway_map                                # terminal 2: the map
-python -m viz.subway_map --route Alewife "Heath Street" # open with a trip selected
-python -m viz.subway_map --at 2026-11-08T12:00          # network as planned for that time
-```
-
-**Planned disruption.** During the November Green Line suspension, Medford/Tufts → Park Street is
-rerouted via the Orange and Red Lines:
+**Planned disruption:** during the November Green Line suspension, Medford/Tufts → Park Street is
+rerouted via the Orange and Red Lines.
 
 ![Route rerouted around a planned Green Line suspension](docs/planned-disruption.png)
 
-**Live service change.** The map is open on Alewife → South Station when a suspension arrives
-(a simulated alert, labeled "demo"). Within one poll, the route is rerouted and the change is
-announced:
+**Live service change:** the map is open when a suspension arrives (a simulated alert, labeled
+"demo"). Within one check, the route is rerouted and the change is announced.
 
 ![Map rerouting live after a simulated Red Line suspension](docs/live-update.png)
 
-The map's data, geometry, hit-testing and live-update logic live in plain Python modules
-(`client.py`, `model.py`, `feed.py`), so they are unit-tested without starting Java. Only
-`sketch.py` uses py5.
-
 ## Website (GitHub Pages)
 
-GitHub Pages serves only static files, so the website brings the backend's work into the browser.
+GitHub Pages serves only static files, so the website does the backend's work in the browser:
 
-```
- GitHub Actions (every 30 min) ──► Python pipeline: MBTA API + BeautifulSoup scraper
-                                     └─► data/alerts.json, data/network.json ─► GitHub Pages
- Browser ──► p5.js map + JavaScript routing engine
-          ├─► data/*.json from the site (network, scraped alerts)
-          └─► MBTA V3 API directly, every 60 s (live alerts, no key needed)
-```
-
-- **Map:** `web/js/app.js` is a [p5.js](https://p5js.org/) sketch (Processing for the web) with the
-  same drawing, interaction and animation as the desktop map. The HTML side panel has station
-  pickers, a "plan for later" time picker (Boston time) and works on phones.
-- **Routing:** `web/js/graph.js` ports the graph engine: adjacency list, (station, route) nodes,
-  heap Dijkstra, closures and LRU cache. `web/js/alerts.js` ports alert normalization and the
-  alert-to-closure rules.
-- **Same answers as Python:** `scripts/export_web_fixtures.py` exports the Python engine's results.
-  `web/tests` then checks that the JavaScript engine matches it on **all 7,750 station pairs** under
-  normal service, today's closures and a planned suspension, along with the closure sets and alert
-  normalization. A pytest test fails if the fixture falls out of date.
-- **Live alerts:** the browser polls the MBTA API every minute and merges in the scraped-only
-  alerts published by the Actions pipeline. If the API is unreachable, it falls back to the
-  published snapshot.
-- **Shareable links:** e.g. `?from=Alewife&to=Heath%20Street&at=2026-11-08T12:00`.
-
-Deployment is `.github/workflows/pages.yml`. It runs on every push to `main` and every 30 minutes,
-so the published alerts stay fresh. `.github/workflows/ci.yml` runs the Python and JavaScript tests
-on every push and pull request.
-
-Preview locally:
-
-```bash
-python -m scripts.build_site
-python -m http.server -d _site 8080      # open http://localhost:8080
-```
-
-## Tech Stack
-
-- **Python 3.10+**
-- **BeautifulSoup** + **requests**: data collection
-- **MBTA V3 API**: live alerts and service changes
-- **FastAPI** + **Uvicorn**: REST API
-- **py5**: Processing for Python (needs a Java 17+ runtime; you don't write any Java)
-- **p5.js** + vanilla JavaScript (ES modules): web map and in-browser routing
-- **GitHub Actions** + **GitHub Pages**: scheduled data pipeline, tests and hosting
-- **pytest** + **node:test**: tests
-
-## Project Structure
-
-```
-├── transit/
-│   ├── config.py       # Paths and settings
-│   ├── models.py       # Data schema (Line, Station, Segment, Alert, Network) + validation
-│   ├── mbta_api.py     # MBTA V3 REST client with rate-limit/5xx retries
-│   ├── scraper.py      # BeautifulSoup alerts scraper and free-text parsing
-│   ├── storage.py      # JSON/CSV readers and writers
-│   ├── pipeline.py     # Builds network + alerts (CLI entry point)
-│   ├── graph.py        # Adjacency-list graph, heap Dijkstra, closures, LRU route cache
-│   └── closures.py     # Active alerts → closed stations/segments at a point in time
-├── api/
-│   ├── main.py         # FastAPI app, endpoints, background alert refresh
-│   ├── state.py        # Live graph, planners, alerts, station lookup
-│   └── schemas.py      # Pydantic response models (OpenAPI docs)
-├── viz/subway_map/
-│   ├── sketch.py       # py5 (Processing) sketch: drawing and interaction
-│   ├── model.py        # Projection, zoom/pan, geometry, hit-testing
-│   ├── feed.py         # Live polling of the API
-│   ├── client.py       # REST client
-│   └── __main__.py     # CLI: python -m viz.subway_map
-├── web/                # GitHub Pages site (p5.js map + JS routing engine)
-│   ├── js/             # app.js (map/UI), graph.js, alerts.js, geo.js
-│   └── tests/          # node --test, checked against Python fixtures
-├── .github/workflows/  # ci.yml (tests), pages.yml (alerts pipeline + deploy)
-├── docs/               # Screenshots
-├── data/
-│   ├── raw/            # Raw API/HTML responses (generated, not tracked)
-│   └── processed/      # Normalized network snapshot (tracked) and alerts (not tracked)
-├── scripts/
-│   ├── benchmark.py    # Memory/speed/cache benchmarks → BENCHMARKS.md
-│   └── baseline_matrix.py  # Original HW4 matrix Dijkstra, kept as the benchmark baseline
-├── tests/              # pytest suite
-├── legacy/             # Original EECE 5642 HW4 code (to be removed)
-├── requirements.txt
-├── pyproject.toml
-└── .env.example        # Template for the MBTA API key
-```
+- **`web/js/app.js`**: a p5.js map with the same drawing, animation and interaction as the desktop
+  map. The HTML panel has station pickers, Boston-time trip planning and shareable links
+  (`?from=Alewife&to=Heath%20Street&at=2026-11-08T12:00`), and works on phones.
+- **`web/js/graph.js`, `alerts.js`**: JavaScript ports of the graph engine and the
+  alert-to-closure rules. `scripts/export_web_fixtures.py` exports the Python engine's results, and
+  `web/tests` checks the JavaScript engine against them on **all 7,750 pairs** in three scenarios.
+- **Live alerts:** the browser polls the MBTA API every minute. GitHub Actions
+  (`.github/workflows/pages.yml`) runs the Python pipeline, including the scraper, every 30 minutes
+  and publishes the merged alerts, which are also the fallback if the API is unreachable.
 
 ## Getting Started
 
-### 1. Clone and create a virtual environment
+**Requirements:** Python 3.10+. For the desktop map, a Java 17+ runtime (installed below). For the
+JavaScript tests, Node 18+.
 
 ```bash
-git clone <repo-url>
-cd "Boston Subway Network Visualization"
-python3 -m venv .venv
-source .venv/bin/activate
+git clone https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization.git
+cd Boston-Subway-Network-Visualization
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-```
 
-### 2. Get an MBTA API key
+# Optional: an MBTA API key raises the rate limit (https://api-v3.mbta.com/register)
+cp .env.example .env          # then set MBTA_API_KEY=<key> (no space after =)
 
-The MBTA V3 API works without a key at a low rate limit (the pipeline waits out rate limits
-automatically, so a keyless run takes about a minute); a free key raises the limit.
-
-1. Register at <https://api-v3.mbta.com/register> and confirm your email.
-2. Sign in, open the API key section of the portal, and request a new key.
-3. Copy the template and paste your key into it:
-
-   ```bash
-   cp .env.example .env
-   # edit .env → MBTA_API_KEY=<your key>
-   ```
-
-`.env` is git-ignored, so the key is never committed.
-
-### 3. Build the data
-
-```bash
-python -m transit.pipeline all
-```
-
-A network snapshot is already committed, so this step is only needed to refresh it or to fetch
-live alerts.
-
-### 4. Start the API
-
-```bash
-uvicorn api.main:app --reload
-```
-
-### 5. Open the live map
-
-py5 needs a Java 17+ runtime. If you don't have one, install it once into `~/.jre`. This leaves
-any system Java untouched, and py5 finds it automatically:
-
-```bash
+# One-time Java 17 install for the desktop map. It goes to ~/.jre, and py5 finds it automatically.
 python -c "import jdk; jdk.install('17', jre=True)"
 ```
 
-Then, with the API running:
+A network snapshot is committed, so everything runs without first running the pipeline.
 
 ```bash
-python -m viz.subway_map
+uvicorn api.main:app                                     # REST API → http://127.0.0.1:8000/docs
+python -m viz.subway_map                                 # desktop map (with the API running)
+python -m viz.subway_map --route Alewife "Heath Street"  # open with a trip selected
+python -m viz.subway_map --at 2026-11-08T12:00           # network as planned for that time
+
+python -m scripts.build_site && python -m http.server -d _site 8080   # website at :8080
+python -m transit.pipeline all                           # refresh network + alerts
+python -m scripts.benchmark --write                      # re-run benchmarks
 ```
 
-### 6. Run the tests
+Desktop map controls: click stations to plan, scroll to zoom, drag to pan, `C` clear,
+`R` refresh alerts, `0` reset view, `S` save a screenshot.
+
+## Testing
 
 ```bash
-pytest                                  # Python
-node --test web/tests/*.test.mjs        # browser engine vs. Python fixtures (Node 18+)
+pytest                                  # 71 Python tests
+node --test web/tests/*.test.mjs        # 13 JavaScript tests, checked against Python fixtures
 ```
 
 Tests run offline against fakes and fixtures. They don't call the MBTA API or mbta.com, and they
 don't need Java. After changing the Python engine, re-export the browser fixtures with
-`python -m scripts.export_web_fixtures`.
+`python -m scripts.export_web_fixtures`. A pytest test fails if you forget.
+
+## Project Structure
+
+```
+├── transit/                # Core package
+│   ├── config.py           # Paths and settings
+│   ├── models.py           # Data schema (Line, Station, Segment, Alert, Network) + validation
+│   ├── mbta_api.py         # MBTA V3 REST client with rate-limit/5xx retries
+│   ├── scraper.py          # BeautifulSoup alerts scraper and free-text parsing
+│   ├── storage.py          # JSON/CSV readers and writers
+│   ├── pipeline.py         # Builds network + alerts (CLI)
+│   ├── graph.py            # Adjacency-list graph, heap Dijkstra, closures, LRU route cache
+│   └── closures.py         # Active alerts → closed stations/segments at a point in time
+├── api/                    # FastAPI service: main.py, state.py, schemas.py
+├── viz/subway_map/         # py5 desktop map: sketch.py, model.py, feed.py, client.py
+├── web/                    # GitHub Pages site: p5.js map + JS engine, tests/
+├── scripts/                # benchmark.py, baseline_matrix.py, build_site.py, export_web_fixtures.py
+├── tests/                  # pytest suite
+├── data/processed/         # Committed network snapshot (alerts are generated)
+├── docs/                   # Screenshots
+├── .github/workflows/      # ci.yml, pages.yml
+└── BENCHMARKS.md
+```
+
+## Tech Stack
+
+Python · requests · BeautifulSoup · MBTA V3 API · FastAPI · Pydantic · Uvicorn · py5 (Processing) ·
+p5.js · JavaScript (ES modules) · GitHub Actions · GitHub Pages · pytest · node:test
+
+## Project History
+
+This started as Homework 4 for **EECE 5642: Data Visualization** at Northeastern University
+(Spring 2024). That version drew a hand-entered T network in Processing and found shortest paths
+with an adjacency-matrix Dijkstra. The original submission is preserved at the git tag
+[`hw4-original`](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/tree/hw4-original).
+
+It was rebuilt in 2026 in phases, each its own pull request:
+
+| Phase | Scope | PR |
+|---|---|---|
+| 0 | Repo restructure and tooling | [#1](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/1) |
+| 1 | Data pipeline: MBTA V3 API client, BeautifulSoup scraper, JSON/CSV schema | [#2](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/2) |
+| 2 | Graph engine: adjacency list, heap Dijkstra, LRU cache, benchmarks | [#3](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/3) |
+| 3 | REST API with live alert-driven routing | [#4](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/4) |
+| 4 | Processing (py5) live map | [#5](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/5) |
+| 5 | Website on GitHub Pages, CI | [#6](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/6) |
+| 6 | Cleanup and documentation | [#7](https://github.com/pathakbaibhav/Boston-Subway-Network-Visualization/pull/7) |
 
 ## License
 

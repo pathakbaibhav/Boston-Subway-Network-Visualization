@@ -1,4 +1,5 @@
-"""Baseline for benchmarks: the original HW4 approach (legacy/HW4-code/Ex_1_2_4/ShortestPath.py).
+"""Baseline for benchmarks: the original HW4 approach (HW4-code/Ex_1_2_4/ShortestPath.py at git tag
+`hw4-original`).
 
 Ported faithfully but without globals: a dense V x V adjacency matrix of minutes plus a second
 V x V matrix of edge indices, and Dijkstra that scans every vertex to pick the next one and every
