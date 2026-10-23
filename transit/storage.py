@@ -54,7 +54,7 @@ def _write_json(path: Path, data) -> Path:
 def _write_csv(path: Path, rows: list[dict]) -> Path:
     with path.open("w", newline="") as f:
         if rows:
-            writer = csv.DictWriter(f, fieldnames=list(rows[0]))
+            writer = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows({k: _flatten(v) for k, v in row.items()} for row in rows)
     return path
