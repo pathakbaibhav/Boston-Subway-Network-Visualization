@@ -18,8 +18,8 @@ renders the network with color-coded lines and live route changes.
 | 0 | Repo restructure, tooling, project skeleton | ✅ Done |
 | 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ✅ Done |
 | 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ✅ Done |
-| 3 | REST API (FastAPI): stations, network, routes, live alerts | ⏳ Next |
-| 4 | Visualization in Processing (py5): color-coded lines, live route updates | Planned |
+| 3 | REST API (FastAPI): stations, network, routes, live alerts | ✅ Done |
+| 4 | Visualization in Processing (py5): color-coded lines, live route updates | ⏳ Next |
 | 5 | Documentation, measured benchmarks, cleanup of `legacy/` | Planned |
 
 ## Data Pipeline
@@ -97,6 +97,55 @@ are in **[BENCHMARKS.md](BENCHMARKS.md)**.
 Both implementations return identical travel times on all 7,750 pairs (with the transfer penalty
 set to 0, matching the original model).
 
+## REST API
+
+A FastAPI service (`api/`) serves the network and live routes. Run it:
+
+```bash
+uvicorn api.main:app --reload
+```
+
+Interactive docs are at <http://127.0.0.1:8000/docs>.
+
+| Endpoint | Description |
+|---|---|
+| `GET /health` | Status, alert freshness, closure version, route-cache stats |
+| `GET /lines` | Lines with official colors |
+| `GET /stations?line=&q=` | Stations, filterable by line group and name |
+| `GET /stations/{station}` | One station (id or name) with neighbors and active alerts |
+| `GET /network` | Full graph for drawing: stations with coordinates, segments with `closed` flags |
+| `GET /route?from=&to=&at=` | Fastest route with per-line legs, transfers and disruption info |
+| `GET /alerts?active=&effect=&line=` | Merged API and scraped alerts |
+| `GET /closures?at=` | Stations and segments currently closed, and the alerts behind them |
+| `POST /alerts/refresh` | Fetch alerts now instead of waiting for the next cycle |
+
+**Live service changes.** A background task re-fetches alerts every `ALERTS_REFRESH_SECONDS`
+(default 120; `0` disables it). `transit/closures.py` turns active alerts into graph closures:
+station closures mean trains skip the station, and suspensions or shuttles close the segments
+between the named stations, on the affected line only. Each change bumps a version number and
+clears the route cache, so the next request reflects the new state.
+
+```bash
+curl "localhost:8000/route?from=Kenmore&to=Park%20Street"
+```
+
+Stations can be given by id (`place-kencl`) or name, case-insensitive. A typo returns `404` with
+suggestions. Every route response includes:
+
+- `disrupted`: whether live closures changed the route.
+- `normal_minutes`: the same trip under normal service.
+- `alert_ids`: the alerts responsible for the change.
+
+If closures make the trip impossible by train, the API returns `409` with the blocking alerts.
+
+**What-if planning.** Add `at=` to plan for a future time against scheduled disruptions, e.g. a
+planned weekend suspension:
+
+```bash
+curl "localhost:8000/route?from=Haymarket&to=North%20Station&at=2026-11-08T12:00"
+# → rides the Orange Line, because the Green Line is suspended between these stations that day
+```
+
 ## Tech Stack
 
 - **Python 3.10+**
@@ -116,8 +165,12 @@ set to 0, matching the original model).
 │   ├── scraper.py      # BeautifulSoup alerts scraper and free-text parsing
 │   ├── storage.py      # JSON/CSV readers and writers
 │   ├── pipeline.py     # Builds network + alerts (CLI entry point)
-│   └── graph.py        # Adjacency-list graph, heap Dijkstra, closures, LRU route cache
-├── api/                # FastAPI service
+│   ├── graph.py        # Adjacency-list graph, heap Dijkstra, closures, LRU route cache
+│   └── closures.py     # Active alerts → closed stations/segments at a point in time
+├── api/
+│   ├── main.py         # FastAPI app, endpoints, background alert refresh
+│   ├── state.py        # Live graph, planners, alerts, station lookup
+│   └── schemas.py      # Pydantic response models (OpenAPI docs)
 ├── viz/subway_map/     # py5 (Processing) sketch
 ├── data/
 │   ├── raw/            # Raw API/HTML responses (generated, not tracked)
@@ -169,7 +222,13 @@ python -m transit.pipeline all
 A network snapshot is already committed, so this step is only needed to refresh it or to fetch
 live alerts.
 
-### 4. Run the tests
+### 4. Start the API
+
+```bash
+uvicorn api.main:app --reload
+```
+
+### 5. Run the tests
 
 ```bash
 pytest

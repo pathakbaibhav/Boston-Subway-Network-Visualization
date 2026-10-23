@@ -24,7 +24,9 @@ class StationNotFoundError(KeyError):
 
 
 class StationClosedError(ValueError):
-    pass
+    def __init__(self, station: str):
+        super().__init__(f"{station} is closed")
+        self.station = station
 
 
 @dataclass
@@ -60,8 +62,10 @@ class TransitGraph:
         self.station_nodes: dict[str, list[int]] = defaultdict(list)
         self._index: dict[tuple[str, str], int] = {}
 
+        self._segment_keys: dict[frozenset[str], list[tuple[str, frozenset[str]]]] = defaultdict(list)
         for seg in network.segments:
-            key = frozenset((seg.from_station, seg.to_station))
+            key = seg.key  # (line, station pair): parallel lines close independently
+            self._segment_keys[key[1]].append(key)
             for route in seg.routes:
                 a = self._node(seg.from_station, route)
                 b = self._node(seg.to_station, route)
@@ -75,7 +79,7 @@ class TransitGraph:
                         self.adjacency[u].append((v, transfer_minutes, TRANSFER, None))
 
         self.closed_stations: frozenset[str] = frozenset()
-        self.closed_segments: frozenset[frozenset[str]] = frozenset()
+        self.closed_segments: frozenset[tuple[str, frozenset[str]]] = frozenset()
         self.version = 0  # bumped on every closure change so caches know to drop stale routes
 
     def _node(self, station: str, route: str) -> int:
@@ -95,11 +99,18 @@ class TransitGraph:
         """Apply live service changes.
 
         A closed station is skipped by trains: it can't be boarded, left or used to transfer, but
-        trains still run through it. A closed segment (pair of adjacent station ids) can't be
-        ridden at all, e.g. a suspension replaced by shuttle buses.
+        trains still run through it. A closed segment can't be ridden at all, e.g. a suspension
+        replaced by shuttle buses. Segments are given as Segment keys `(line, frozenset(pair))` to
+        close one line, or as a plain pair of station ids to close every line between them.
         """
         stations = frozenset(stations)
-        segments = frozenset(frozenset(pair) for pair in segments)
+        keys = set()
+        for item in segments:
+            if len(item) == 2 and isinstance(item[1], frozenset):
+                keys.add(item)
+            else:
+                keys.update(self._segment_keys.get(frozenset(item), []))
+        segments = frozenset(keys)
         if stations != self.closed_stations or segments != self.closed_segments:
             self.closed_stations, self.closed_segments = stations, segments
             self.version += 1
@@ -115,7 +126,7 @@ class TransitGraph:
             if station not in self.station_nodes:
                 raise StationNotFoundError(station)
             if station in self.closed_stations:
-                raise StationClosedError(f"{station} is closed")
+                raise StationClosedError(station)
         if origin == destination:
             return 0.0, ()
 
