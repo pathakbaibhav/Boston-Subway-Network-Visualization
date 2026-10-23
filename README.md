@@ -16,11 +16,52 @@ renders the network with color-coded lines and live route changes.
 | Phase | Scope | Status |
 |---|---|---|
 | 0 | Repo restructure, tooling, project skeleton | ✅ Done |
-| 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ⏳ Next |
-| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | Planned |
+| 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ✅ Done |
+| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | ⏳ Next |
 | 3 | REST API (FastAPI): stations, network, routes, live alerts | Planned |
 | 4 | Visualization in Processing (py5): color-coded lines, live route updates | Planned |
 | 5 | Documentation, measured benchmarks, cleanup of `legacy/` | Planned |
+
+## Data Pipeline
+
+`transit/pipeline.py` builds two datasets from two independent sources:
+
+```
+ MBTA V3 API ──────┬─► routes, canonical stop sequences ─► network topology
+ (REST, JSON)      ├─► weekday schedules ─────────────────► travel minutes per segment
+                   └─► alerts (structured) ──┐
+                                              ├─► merged by alert id ─► alerts.json / alerts.csv
+ mbta.com/alerts ──► BeautifulSoup ──────────┘
+ (HTML)              free-text parsing: effect type + affected stations
+```
+
+**Network** (`data/processed/network.json`, plus `stations.csv`, `segments.csv`, `lines.csv`)
+- **125 stations, 127 track segments, 8 routes** (Red, Mattapan, Orange, Blue, Green B/C/D/E).
+- Topology comes from each route's canonical stop sequence. Green Line branches share trunk
+  segments, so they are stored once with every route that runs over them.
+- Each segment's travel time is the **mean of real scheduled trips** (10:00–14:00 on a weekday),
+  typically 50–240 trips per segment. Segments with no scheduled trips (e.g. during a shutdown)
+  fall back to later weekdays, then to a distance-based estimate, and are tagged
+  `minutes_source: "estimated"`.
+- The network is validated before writing: unknown stations, duplicate segments, non-positive
+  times, out-of-area coordinates and disconnected stations all fail the build.
+
+**Alerts** (`data/processed/alerts.json`, plus `alerts.csv`; regenerated on demand, not committed)
+- The API provides structured alerts (effect, severity, affected platforms → stations).
+- The public alerts page is scraped with BeautifulSoup as a second source, honoring `robots.txt`.
+  Its free text is parsed into the same schema: effect type from keywords, affected stations by
+  matching station names (handles abbreviations like "Babcock St", ignores direction phrases like
+  "Alewife platform"). This covers alerts the API's route filter misses (elevators, escalators)
+  and keeps alerts available if the API is down.
+- Raw responses from both sources are kept in `data/raw/` for debugging.
+
+Run it:
+
+```bash
+python -m transit.pipeline all        # network + alerts
+python -m transit.pipeline network    # network only (optionally --date YYYY-MM-DD)
+python -m transit.pipeline alerts     # refresh alerts against the existing network
+```
 
 ## Tech Stack
 
@@ -34,12 +75,18 @@ renders the network with color-coded lines and live route changes.
 ## Project Structure
 
 ```
-├── transit/            # Core package: data pipeline, graph model, routing
+├── transit/
+│   ├── config.py       # Paths and settings
+│   ├── models.py       # Data schema (Line, Station, Segment, Alert, Network) + validation
+│   ├── mbta_api.py     # MBTA V3 REST client with rate-limit/5xx retries
+│   ├── scraper.py      # BeautifulSoup alerts scraper and free-text parsing
+│   ├── storage.py      # JSON/CSV readers and writers
+│   └── pipeline.py     # Builds network + alerts (CLI entry point)
 ├── api/                # FastAPI service
 ├── viz/subway_map/     # py5 (Processing) sketch
 ├── data/
-│   ├── raw/            # Pipeline input snapshots (generated, not tracked)
-│   └── processed/      # Normalized JSON/CSV output (generated, not tracked)
+│   ├── raw/            # Raw API/HTML responses (generated, not tracked)
+│   └── processed/      # Normalized network snapshot (tracked) and alerts (not tracked)
 ├── scripts/            # Benchmarks and utility scripts
 ├── tests/              # pytest suite
 ├── legacy/             # Original EECE 5642 HW4 code (to be removed)
@@ -62,7 +109,8 @@ pip install -r requirements.txt
 
 ### 2. Get an MBTA API key
 
-The MBTA V3 API works without a key at a low rate limit; a free key raises it.
+The MBTA V3 API works without a key at a low rate limit (the pipeline waits out rate limits
+automatically, so a keyless run takes about a minute); a free key raises the limit.
 
 1. Register at <https://api-v3.mbta.com/register> and confirm your email.
 2. Sign in, open the API key section of the portal, and request a new key.
@@ -75,11 +123,22 @@ The MBTA V3 API works without a key at a low rate limit; a free key raises it.
 
 `.env` is git-ignored, so the key is never committed.
 
-### 3. Run the tests
+### 3. Build the data
+
+```bash
+python -m transit.pipeline all
+```
+
+A network snapshot is already committed, so this step is only needed to refresh it or to fetch
+live alerts.
+
+### 4. Run the tests
 
 ```bash
 pytest
 ```
+
+Tests run offline against fakes and fixtures; they don't call the MBTA API or mbta.com.
 
 ## License
 

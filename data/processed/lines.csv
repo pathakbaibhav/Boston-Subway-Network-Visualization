@@ -1,0 +1,9 @@
+id,name,group,color,route_type
+Red,Red Line,Red,#DA291C,1
+Mattapan,Mattapan Line,Mattapan,#DA291C,0
+Orange,Orange Line,Orange,#ED8B00,1
+Green-B,Green Line B,Green,#00843D,0
+Green-C,Green Line C,Green,#00843D,0
+Green-D,Green Line D,Green,#00843D,0
+Green-E,Green Line E,Green,#00843D,0
+Blue,Blue Line,Blue,#003DA5,1

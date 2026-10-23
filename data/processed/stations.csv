@@ -1,0 +1,126 @@
+id,name,latitude,longitude,municipality,lines
+place-aport,Airport,42.374262,-71.030395,Boston,Blue
+place-alfcl,Alewife,42.39583,-71.141287,Cambridge,Red
+place-alsgr,Allston Street,42.348701,-71.137955,Boston,Green
+place-amory,Amory Street,42.350992,-71.114748,Boston,Green
+place-andrw,Andrew,42.330154,-71.057655,Boston,Red
+place-aqucl,Aquarium,42.359784,-71.051652,Boston,Blue
+place-armnl,Arlington,42.351902,-71.070893,Boston,Green
+place-asmnl,Ashmont,42.28452,-71.063777,Boston,Mattapan;Red
+place-astao,Assembly,42.392811,-71.077257,Somerville,Orange
+place-babck,Babcock Street,42.351616,-71.119924,Boston,Green
+place-bbsta,Back Bay,42.34735,-71.075727,Boston,Orange
+place-bckhl,Back of the Hill,42.330139,-71.111313,Boston,Green
+place-balsq,Ball Square,42.399889,-71.111003,Medford,Green
+place-bmmnl,Beachmont,42.3975423,-70.9923194,Revere,Blue
+place-bcnfd,Beaconsfield,42.335765,-71.140455,Brookline,Green
+place-bland,Blandford Street,42.349293,-71.100258,Boston,Green
+place-lake,Boston College,42.340081,-71.166769,Boston,Green
+place-bucen,Boston University Central,42.350082,-71.106865,Boston,Green
+place-buest,Boston University East,42.349735,-71.103889,Boston,Green
+place-bomnl,Bowdoin,42.361365,-71.062037,Boston,Blue
+place-boyls,Boylston,42.35302,-71.06459,Boston,Green
+place-brntn,Braintree,42.2078543,-71.0011385,Braintree,Red
+place-bndhl,Brandon Hall,42.340023,-71.129082,Brookline,Green
+place-brmnl,Brigham Circle,42.334229,-71.104609,Boston,Green
+place-brdwy,Broadway,42.342622,-71.056967,Boston,Red
+place-brkhl,Brookline Hills,42.331316,-71.126683,Brookline,Green
+place-bvmnl,Brookline Village,42.332608,-71.116857,Brookline,Green
+place-butlr,Butler,42.272429,-71.062519,Boston,Mattapan
+place-capst,Capen Street,42.267563,-71.087338,Milton,Mattapan
+place-cedgr,Cedar Grove,42.279629,-71.060394,Boston,Mattapan
+place-cntsq,Central,42.365486,-71.103802,Cambridge,Red
+place-cenav,Central Avenue,42.270027,-71.073444,Milton,Mattapan
+place-chmnl,Charles/MGH,42.361166,-71.070628,Boston,Red
+place-chhil,Chestnut Hill,42.326753,-71.164699,Newton,Green
+place-chill,Chestnut Hill Avenue,42.338169,-71.15316,Boston,Green
+place-chncl,Chinatown,42.352547,-71.062752,Boston,Orange
+place-chswk,Chiswick Road,42.340805,-71.150711,Boston,Green
+place-clmnl,Cleveland Circle,42.336142,-71.149326,Boston,Green
+place-ccmnl,Community College,42.373622,-71.069533,Boston,Orange
+place-cool,Coolidge Corner,42.342116,-71.121263,Brookline,Green
+place-coecl,Copley,42.349974,-71.077447,Boston,Green
+place-davis,Davis,42.39674,-71.121815,Somerville,Red
+place-denrd,Dean Road,42.337656,-71.142156,Brookline,Green
+place-dwnxg,Downtown Crossing,42.355518,-71.060225,Boston,Orange;Red
+place-esomr,East Somerville,42.379467,-71.086625,Somerville,Green
+place-eliot,Eliot,42.319045,-71.216684,Newton,Green
+place-engav,Englewood Avenue,42.337104,-71.144852,Brookline,Green
+place-fbkst,Fairbanks Street,42.339725,-71.131073,Brookline,Green
+place-fenwy,Fenway,42.345403,-71.104213,Boston,Green
+place-fenwd,Fenwood Road,42.333706,-71.105728,Boston,Green
+place-fldcr,Fields Corner,42.300093,-71.061667,Boston,Red
+place-forhl,Forest Hills,42.300713,-71.113943,Boston,Orange
+place-gilmn,Gilman Square,42.387928,-71.096766,Somerville,Green
+place-gover,Government Center,42.359705,-71.059215,Boston,Blue;Green
+place-grnst,Green Street,42.310525,-71.107414,Boston,Orange
+place-grigg,Griggs Street,42.348545,-71.134949,Boston,Green
+place-harsq,Harvard,42.373362,-71.118956,Cambridge,Red
+place-harvd,Harvard Avenue,42.350243,-71.131355,Boston,Green
+place-hwsst,Hawes Street,42.344906,-71.111145,Brookline,Green
+place-haecl,Haymarket,42.363021,-71.05829,Boston,Green;Orange
+place-hsmnl,Heath Street,42.328316,-71.110252,Boston,Green
+place-hymnl,Hynes Convention Center,42.347888,-71.087903,Boston,Green
+place-jfk,JFK/UMass,42.320685,-71.052391,Boston,Red
+place-jaksn,Jackson Square,42.323132,-71.099592,Boston,Orange
+place-knncl,Kendall/MIT,42.3624908,-71.0861765,Cambridge,Red
+place-kencl,Kenmore,42.348949,-71.095169,Boston,Green
+place-kntst,Kent Street,42.344074,-71.114197,Brookline,Green
+place-lech,Lechmere,42.371572,-71.076584,Cambridge,Green
+place-longw,Longwood,42.341702,-71.109956,Brookline,Green
+place-lngmd,Longwood Medical Area,42.33596,-71.100052,Boston,Green
+place-mgngl,Magoun Square,42.393682,-71.1063879,Somerville,Green
+place-mlmnl,Malden Center,42.426632,-71.07411,Malden,Orange
+place-masta,Massachusetts Avenue,42.341512,-71.083423,Boston,Orange
+place-matt,Mattapan,42.26762,-71.092486,Boston,Mattapan
+place-mvbcl,Maverick,42.3691186,-71.0395296,Boston,Blue
+place-mdftf,Medford/Tufts,42.407975,-71.117044,Medford,Green
+place-miltt,Milton,42.270349,-71.067266,Milton,Mattapan
+place-mispk,Mission Park,42.333195,-71.109756,Boston,Green
+place-mfa,Museum of Fine Arts,42.337711,-71.095512,Boston,Green
+place-newto,Newton Centre,42.329443,-71.192414,Newton,Green
+place-newtn,Newton Highlands,42.322381,-71.205509,Newton,Green
+place-nqncy,North Quincy,42.275275,-71.029583,Quincy,Red
+place-north,North Station,42.365577,-71.06129,Boston,Green;Orange
+place-nuniv,Northeastern University,42.340401,-71.088806,Boston,Green
+place-ogmnl,Oak Grove,42.43668,-71.071097,Malden,Orange
+place-orhte,Orient Heights,42.386867,-71.004736,Boston,Blue
+place-brico,Packard's Corner,42.351967,-71.125031,Boston,Green
+place-pktrm,Park Street,42.3563946,-71.0624242,Boston,Green;Red
+place-portr,Porter,42.3884,-71.119149,Cambridge,Red
+place-prmnl,Prudential,42.34557,-71.081696,Boston,Green
+place-qamnl,Quincy Adams,42.233391,-71.007153,Quincy,Red
+place-qnctr,Quincy Center,42.251809,-71.005409,Quincy,Red
+place-rsmnl,Reservoir,42.335088,-71.148758,Brookline,Green
+place-rbmnl,Revere Beach,42.4078425,-70.9925332,Revere,Blue
+place-river,Riverside,42.337352,-71.252685,Newton,Green
+place-rvrwy,Riverway,42.331684,-71.111931,Boston,Green
+place-rcmnl,Roxbury Crossing,42.331397,-71.095451,Boston,Orange
+place-rugg,Ruggles,42.336377,-71.088961,Boston,Orange
+place-smary,Saint Mary's Street,42.345974,-71.107353,Brookline,Green
+place-stpul,Saint Paul Street,42.343327,-71.116997,Brookline,Green
+place-shmnl,Savin Hill,42.31129,-71.053331,Boston,Red
+place-spmnl,Science Park/West End,42.366664,-71.067666,Boston,Green
+place-smmnl,Shawmut,42.2931258,-71.065738,Boston,Red
+place-sstat,South Station,42.352271,-71.055242,Boston,Red
+place-sougr,South Street,42.3396,-71.157661,Boston,Green
+place-state,State,42.358978,-71.057598,Boston,Blue;Orange
+place-sbmnl,Stony Brook,42.317062,-71.104248,Boston,Orange
+place-sdmnl,Suffolk Downs,42.3905007,-70.9971226,Boston,Blue
+place-sull,Sullivan Square,42.383975,-71.076994,Boston,Orange
+place-sumav,Summit Avenue,42.34111,-71.12561,Brookline,Green
+place-sthld,Sutherland Road,42.341614,-71.146202,Boston,Green
+place-symcl,Symphony,42.342687,-71.085056,Boston,Green
+place-tapst,Tappan Street,42.338459,-71.138702,Brookline,Green
+place-tumnl,Tufts Medical Center,42.349662,-71.063917,Boston,Orange
+place-unsqu,Union Square,42.377359,-71.094761,Somerville,Green
+place-valrd,Valley Road,42.268347,-71.081343,Milton,Mattapan
+place-waban,Waban,42.325845,-71.230609,Newton,Green
+place-wrnst,Warren Street,42.348343,-71.140457,Boston,Green
+place-bcnwa,Washington Square,42.339394,-71.13533,Brookline,Green
+place-wascm,Washington Street,42.343864,-71.142853,Boston,Green
+place-welln,Wellington,42.40237,-71.077082,Medford,Orange
+place-wlsta,Wollaston,42.2665139,-71.0203369,Quincy,Red
+place-wondl,Wonderland,42.41342,-70.991648,Revere,Blue
+place-wimnl,Wood Island,42.3796403,-71.0228654,Boston,Blue
+place-woodl,Woodland,42.332902,-71.243362,Newton,Green
