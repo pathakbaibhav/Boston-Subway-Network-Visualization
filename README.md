@@ -1,34 +1,86 @@
-# **Boston T Network Visualization - EECE 5642 Homework 4**
+# Boston Subway Network Optimization & Visualization
 
-This repository contains the solution for **Homework 4** of the course **EECE 5642: Data Visualization** at **Northeastern University**, under the guidance of **Professor Y. Raymond Fu**. This project focuses on the visualization of the Boston T (subway) network as an undirected graph using **Processing** and **Python scripts** for data collection and analysis.
+A route-optimization backend and live visualization for Boston's MBTA subway network (the "T").
+Stations are modeled as graph nodes and track segments as weighted edges (travel minutes); shortest
+routes are computed with Dijkstra's algorithm and served over a REST API, and a Processing sketch
+renders the network with color-coded lines and live route changes.
 
----
-
-## **Overview**
-
-The goal of this project is to visualize Boston’s subway network, the T, as a graph with stations as nodes and connections as edges. The project includes data collection, graph construction, and implementation of the **shortest path algorithm**.
-
-### **Key Features**
-1. **Network Graph Visualization**: Displays the Boston T network with station nodes and connection edges.
-2. **Interactive Visualization**: Nodes are draggable, and shortest paths can be calculated interactively.
-3. **Data Collection Scripts**: Python scripts collect and store MBTA station and connection data.
-4. **Shortest Path Calculation**: Implements **Dijkstra’s algorithm** to compute the shortest path between two stations.
-5. **Color Effects**: Animates edge color changes to distinguish active and non-active paths.
+> Originally built as Homework 4 for **EECE 5642: Data Visualization** at Northeastern University
+> (Spring 2024). The original assignment code is preserved in [`legacy/`](legacy/) and is being
+> rebuilt into a full backend + visualization.
 
 ---
 
-## **Repository Structure**
+## Roadmap
 
-├── README.md # Project overview and setup instructions ├── TheTDataCollection # Folder containing data collection scripts │ ├── stations.py # Extracts station names from MBTA data │ ├── connections.py # Extracts connection data between stations │ └── stations.csv # Output - List of station names │ └── connections.csv # Output - List of connections with travel times ├── Framework # Framework for graph visualization using Processing │ └── Sketch Files # Processing sketches for visualization ├── Ex_1_2_X # Sketch versions for different stages (e.g., Shortest Path, Color Effect) └── HW4-EECE 5642.pdf # Original assignment instructions
+| Phase | Scope | Status |
+|---|---|---|
+| 0 | Repo restructure, tooling, project skeleton | ✅ Done |
+| 1 | Data pipeline: BeautifulSoup scraper + MBTA V3 API client, normalized JSON/CSV schema | ⏳ Next |
+| 2 | Graph engine: adjacency list, heap-based Dijkstra (O(E log V)), route caching, benchmarks | Planned |
+| 3 | REST API (FastAPI): stations, network, routes, live alerts | Planned |
+| 4 | Visualization in Processing (py5): color-coded lines, live route updates | Planned |
+| 5 | Documentation, measured benchmarks, cleanup of `legacy/` | Planned |
 
+## Tech Stack
 
----
+- **Python 3.10+**
+- **BeautifulSoup** + **requests**: data collection
+- **MBTA V3 API**: live alerts and service changes
+- **FastAPI** + **Uvicorn**: REST API
+- **py5**: Processing for Python (needs a Java 17+ runtime; you don't write any Java)
+- **pytest**: tests
 
-## **Getting Started**
+## Project Structure
 
-### **Prerequisites**
-1. **Processing IDE**: Download and install from [Processing.org](https://processing.org/).
-2. **Python 3.x**: Install from [Python.org](https://www.python.org/).
-3. **Required Python Libraries**:
+```
+├── transit/            # Core package: data pipeline, graph model, routing
+├── api/                # FastAPI service
+├── viz/subway_map/     # py5 (Processing) sketch
+├── data/
+│   ├── raw/            # Pipeline input snapshots (generated, not tracked)
+│   └── processed/      # Normalized JSON/CSV output (generated, not tracked)
+├── scripts/            # Benchmarks and utility scripts
+├── tests/              # pytest suite
+├── legacy/             # Original EECE 5642 HW4 code (to be removed)
+├── requirements.txt
+├── pyproject.toml
+└── .env.example        # Template for the MBTA API key
+```
+
+## Getting Started
+
+### 1. Clone and create a virtual environment
+
+```bash
+git clone <repo-url>
+cd "Boston Subway Network Visualization"
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2. Get an MBTA API key
+
+The MBTA V3 API works without a key at a low rate limit; a free key raises it.
+
+1. Register at <https://api-v3.mbta.com/register> and confirm your email.
+2. Sign in, open the API key section of the portal, and request a new key.
+3. Copy the template and paste your key into it:
+
    ```bash
-   pip install pandas requests
+   cp .env.example .env
+   # edit .env → MBTA_API_KEY=<your key>
+   ```
+
+`.env` is git-ignored, so the key is never committed.
+
+### 3. Run the tests
+
+```bash
+pytest
+```
+
+## License
+
+For educational and portfolio use.
