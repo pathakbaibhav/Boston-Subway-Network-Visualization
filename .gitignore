@@ -14,8 +14,9 @@ venv/
 # Secrets
 .env
 
-# Generated data (rebuilt by the pipeline)
+# Raw source snapshots (re-created on every pipeline run)
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
-!data/processed/.gitkeep
+
+# Live alerts change constantly; the network snapshot in data/processed is committed
+data/processed/alerts.*

@@ -1,0 +1,3007 @@
+{
+  "service_date": "2026-10-26",
+  "generated_at": "2026-10-23T18:56:04+00:00",
+  "lines": [
+    {
+      "id": "Red",
+      "name": "Red Line",
+      "group": "Red",
+      "color": "#DA291C",
+      "route_type": 1
+    },
+    {
+      "id": "Mattapan",
+      "name": "Mattapan Line",
+      "group": "Mattapan",
+      "color": "#DA291C",
+      "route_type": 0
+    },
+    {
+      "id": "Orange",
+      "name": "Orange Line",
+      "group": "Orange",
+      "color": "#ED8B00",
+      "route_type": 1
+    },
+    {
+      "id": "Green-B",
+      "name": "Green Line B",
+      "group": "Green",
+      "color": "#00843D",
+      "route_type": 0
+    },
+    {
+      "id": "Green-C",
+      "name": "Green Line C",
+      "group": "Green",
+      "color": "#00843D",
+      "route_type": 0
+    },
+    {
+      "id": "Green-D",
+      "name": "Green Line D",
+      "group": "Green",
+      "color": "#00843D",
+      "route_type": 0
+    },
+    {
+      "id": "Green-E",
+      "name": "Green Line E",
+      "group": "Green",
+      "color": "#00843D",
+      "route_type": 0
+    },
+    {
+      "id": "Blue",
+      "name": "Blue Line",
+      "group": "Blue",
+      "color": "#003DA5",
+      "route_type": 1
+    }
+  ],
+  "stations": [
+    {
+      "id": "place-aport",
+      "name": "Airport",
+      "latitude": 42.374262,
+      "longitude": -71.030395,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-alfcl",
+      "name": "Alewife",
+      "latitude": 42.39583,
+      "longitude": -71.141287,
+      "municipality": "Cambridge",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-alsgr",
+      "name": "Allston Street",
+      "latitude": 42.348701,
+      "longitude": -71.137955,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-amory",
+      "name": "Amory Street",
+      "latitude": 42.350992,
+      "longitude": -71.114748,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-andrw",
+      "name": "Andrew",
+      "latitude": 42.330154,
+      "longitude": -71.057655,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-aqucl",
+      "name": "Aquarium",
+      "latitude": 42.359784,
+      "longitude": -71.051652,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-armnl",
+      "name": "Arlington",
+      "latitude": 42.351902,
+      "longitude": -71.070893,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-asmnl",
+      "name": "Ashmont",
+      "latitude": 42.28452,
+      "longitude": -71.063777,
+      "municipality": "Boston",
+      "lines": [
+        "Mattapan",
+        "Red"
+      ]
+    },
+    {
+      "id": "place-astao",
+      "name": "Assembly",
+      "latitude": 42.392811,
+      "longitude": -71.077257,
+      "municipality": "Somerville",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-babck",
+      "name": "Babcock Street",
+      "latitude": 42.351616,
+      "longitude": -71.119924,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bbsta",
+      "name": "Back Bay",
+      "latitude": 42.34735,
+      "longitude": -71.075727,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-bckhl",
+      "name": "Back of the Hill",
+      "latitude": 42.330139,
+      "longitude": -71.111313,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-balsq",
+      "name": "Ball Square",
+      "latitude": 42.399889,
+      "longitude": -71.111003,
+      "municipality": "Medford",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bmmnl",
+      "name": "Beachmont",
+      "latitude": 42.3975423,
+      "longitude": -70.9923194,
+      "municipality": "Revere",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-bcnfd",
+      "name": "Beaconsfield",
+      "latitude": 42.335765,
+      "longitude": -71.140455,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bland",
+      "name": "Blandford Street",
+      "latitude": 42.349293,
+      "longitude": -71.100258,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-lake",
+      "name": "Boston College",
+      "latitude": 42.340081,
+      "longitude": -71.166769,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bucen",
+      "name": "Boston University Central",
+      "latitude": 42.350082,
+      "longitude": -71.106865,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-buest",
+      "name": "Boston University East",
+      "latitude": 42.349735,
+      "longitude": -71.103889,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bomnl",
+      "name": "Bowdoin",
+      "latitude": 42.361365,
+      "longitude": -71.062037,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-boyls",
+      "name": "Boylston",
+      "latitude": 42.35302,
+      "longitude": -71.06459,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-brntn",
+      "name": "Braintree",
+      "latitude": 42.2078543,
+      "longitude": -71.0011385,
+      "municipality": "Braintree",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-bndhl",
+      "name": "Brandon Hall",
+      "latitude": 42.340023,
+      "longitude": -71.129082,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-brmnl",
+      "name": "Brigham Circle",
+      "latitude": 42.334229,
+      "longitude": -71.104609,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-brdwy",
+      "name": "Broadway",
+      "latitude": 42.342622,
+      "longitude": -71.056967,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-brkhl",
+      "name": "Brookline Hills",
+      "latitude": 42.331316,
+      "longitude": -71.126683,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bvmnl",
+      "name": "Brookline Village",
+      "latitude": 42.332608,
+      "longitude": -71.116857,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-butlr",
+      "name": "Butler",
+      "latitude": 42.272429,
+      "longitude": -71.062519,
+      "municipality": "Boston",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-capst",
+      "name": "Capen Street",
+      "latitude": 42.267563,
+      "longitude": -71.087338,
+      "municipality": "Milton",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-cedgr",
+      "name": "Cedar Grove",
+      "latitude": 42.279629,
+      "longitude": -71.060394,
+      "municipality": "Boston",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-cntsq",
+      "name": "Central",
+      "latitude": 42.365486,
+      "longitude": -71.103802,
+      "municipality": "Cambridge",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-cenav",
+      "name": "Central Avenue",
+      "latitude": 42.270027,
+      "longitude": -71.073444,
+      "municipality": "Milton",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-chmnl",
+      "name": "Charles/MGH",
+      "latitude": 42.361166,
+      "longitude": -71.070628,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-chhil",
+      "name": "Chestnut Hill",
+      "latitude": 42.326753,
+      "longitude": -71.164699,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-chill",
+      "name": "Chestnut Hill Avenue",
+      "latitude": 42.338169,
+      "longitude": -71.15316,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-chncl",
+      "name": "Chinatown",
+      "latitude": 42.352547,
+      "longitude": -71.062752,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-chswk",
+      "name": "Chiswick Road",
+      "latitude": 42.340805,
+      "longitude": -71.150711,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-clmnl",
+      "name": "Cleveland Circle",
+      "latitude": 42.336142,
+      "longitude": -71.149326,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-ccmnl",
+      "name": "Community College",
+      "latitude": 42.373622,
+      "longitude": -71.069533,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-cool",
+      "name": "Coolidge Corner",
+      "latitude": 42.342116,
+      "longitude": -71.121263,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-coecl",
+      "name": "Copley",
+      "latitude": 42.349974,
+      "longitude": -71.077447,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-davis",
+      "name": "Davis",
+      "latitude": 42.39674,
+      "longitude": -71.121815,
+      "municipality": "Somerville",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-denrd",
+      "name": "Dean Road",
+      "latitude": 42.337656,
+      "longitude": -71.142156,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-dwnxg",
+      "name": "Downtown Crossing",
+      "latitude": 42.355518,
+      "longitude": -71.060225,
+      "municipality": "Boston",
+      "lines": [
+        "Orange",
+        "Red"
+      ]
+    },
+    {
+      "id": "place-esomr",
+      "name": "East Somerville",
+      "latitude": 42.379467,
+      "longitude": -71.086625,
+      "municipality": "Somerville",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-eliot",
+      "name": "Eliot",
+      "latitude": 42.319045,
+      "longitude": -71.216684,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-engav",
+      "name": "Englewood Avenue",
+      "latitude": 42.337104,
+      "longitude": -71.144852,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-fbkst",
+      "name": "Fairbanks Street",
+      "latitude": 42.339725,
+      "longitude": -71.131073,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-fenwy",
+      "name": "Fenway",
+      "latitude": 42.345403,
+      "longitude": -71.104213,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-fenwd",
+      "name": "Fenwood Road",
+      "latitude": 42.333706,
+      "longitude": -71.105728,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-fldcr",
+      "name": "Fields Corner",
+      "latitude": 42.300093,
+      "longitude": -71.061667,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-forhl",
+      "name": "Forest Hills",
+      "latitude": 42.300713,
+      "longitude": -71.113943,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-gilmn",
+      "name": "Gilman Square",
+      "latitude": 42.387928,
+      "longitude": -71.096766,
+      "municipality": "Somerville",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-gover",
+      "name": "Government Center",
+      "latitude": 42.359705,
+      "longitude": -71.059215,
+      "municipality": "Boston",
+      "lines": [
+        "Blue",
+        "Green"
+      ]
+    },
+    {
+      "id": "place-grnst",
+      "name": "Green Street",
+      "latitude": 42.310525,
+      "longitude": -71.107414,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-grigg",
+      "name": "Griggs Street",
+      "latitude": 42.348545,
+      "longitude": -71.134949,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-harsq",
+      "name": "Harvard",
+      "latitude": 42.373362,
+      "longitude": -71.118956,
+      "municipality": "Cambridge",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-harvd",
+      "name": "Harvard Avenue",
+      "latitude": 42.350243,
+      "longitude": -71.131355,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-hwsst",
+      "name": "Hawes Street",
+      "latitude": 42.344906,
+      "longitude": -71.111145,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-haecl",
+      "name": "Haymarket",
+      "latitude": 42.363021,
+      "longitude": -71.05829,
+      "municipality": "Boston",
+      "lines": [
+        "Green",
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-hsmnl",
+      "name": "Heath Street",
+      "latitude": 42.328316,
+      "longitude": -71.110252,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-hymnl",
+      "name": "Hynes Convention Center",
+      "latitude": 42.347888,
+      "longitude": -71.087903,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-jfk",
+      "name": "JFK/UMass",
+      "latitude": 42.320685,
+      "longitude": -71.052391,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-jaksn",
+      "name": "Jackson Square",
+      "latitude": 42.323132,
+      "longitude": -71.099592,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-knncl",
+      "name": "Kendall/MIT",
+      "latitude": 42.3624908,
+      "longitude": -71.0861765,
+      "municipality": "Cambridge",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-kencl",
+      "name": "Kenmore",
+      "latitude": 42.348949,
+      "longitude": -71.095169,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-kntst",
+      "name": "Kent Street",
+      "latitude": 42.344074,
+      "longitude": -71.114197,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-lech",
+      "name": "Lechmere",
+      "latitude": 42.371572,
+      "longitude": -71.076584,
+      "municipality": "Cambridge",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-longw",
+      "name": "Longwood",
+      "latitude": 42.341702,
+      "longitude": -71.109956,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-lngmd",
+      "name": "Longwood Medical Area",
+      "latitude": 42.33596,
+      "longitude": -71.100052,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-mgngl",
+      "name": "Magoun Square",
+      "latitude": 42.393682,
+      "longitude": -71.1063879,
+      "municipality": "Somerville",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-mlmnl",
+      "name": "Malden Center",
+      "latitude": 42.426632,
+      "longitude": -71.07411,
+      "municipality": "Malden",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-masta",
+      "name": "Massachusetts Avenue",
+      "latitude": 42.341512,
+      "longitude": -71.083423,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-matt",
+      "name": "Mattapan",
+      "latitude": 42.26762,
+      "longitude": -71.092486,
+      "municipality": "Boston",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-mvbcl",
+      "name": "Maverick",
+      "latitude": 42.3691186,
+      "longitude": -71.0395296,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-mdftf",
+      "name": "Medford/Tufts",
+      "latitude": 42.407975,
+      "longitude": -71.117044,
+      "municipality": "Medford",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-miltt",
+      "name": "Milton",
+      "latitude": 42.270349,
+      "longitude": -71.067266,
+      "municipality": "Milton",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-mispk",
+      "name": "Mission Park",
+      "latitude": 42.333195,
+      "longitude": -71.109756,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-mfa",
+      "name": "Museum of Fine Arts",
+      "latitude": 42.337711,
+      "longitude": -71.095512,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-newto",
+      "name": "Newton Centre",
+      "latitude": 42.329443,
+      "longitude": -71.192414,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-newtn",
+      "name": "Newton Highlands",
+      "latitude": 42.322381,
+      "longitude": -71.205509,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-nqncy",
+      "name": "North Quincy",
+      "latitude": 42.275275,
+      "longitude": -71.029583,
+      "municipality": "Quincy",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-north",
+      "name": "North Station",
+      "latitude": 42.365577,
+      "longitude": -71.06129,
+      "municipality": "Boston",
+      "lines": [
+        "Green",
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-nuniv",
+      "name": "Northeastern University",
+      "latitude": 42.340401,
+      "longitude": -71.088806,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-ogmnl",
+      "name": "Oak Grove",
+      "latitude": 42.43668,
+      "longitude": -71.071097,
+      "municipality": "Malden",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-orhte",
+      "name": "Orient Heights",
+      "latitude": 42.386867,
+      "longitude": -71.004736,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-brico",
+      "name": "Packard's Corner",
+      "latitude": 42.351967,
+      "longitude": -71.125031,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-pktrm",
+      "name": "Park Street",
+      "latitude": 42.3563946,
+      "longitude": -71.0624242,
+      "municipality": "Boston",
+      "lines": [
+        "Green",
+        "Red"
+      ]
+    },
+    {
+      "id": "place-portr",
+      "name": "Porter",
+      "latitude": 42.3884,
+      "longitude": -71.119149,
+      "municipality": "Cambridge",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-prmnl",
+      "name": "Prudential",
+      "latitude": 42.34557,
+      "longitude": -71.081696,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-qamnl",
+      "name": "Quincy Adams",
+      "latitude": 42.233391,
+      "longitude": -71.007153,
+      "municipality": "Quincy",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-qnctr",
+      "name": "Quincy Center",
+      "latitude": 42.251809,
+      "longitude": -71.005409,
+      "municipality": "Quincy",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-rsmnl",
+      "name": "Reservoir",
+      "latitude": 42.335088,
+      "longitude": -71.148758,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-rbmnl",
+      "name": "Revere Beach",
+      "latitude": 42.4078425,
+      "longitude": -70.9925332,
+      "municipality": "Revere",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-river",
+      "name": "Riverside",
+      "latitude": 42.337352,
+      "longitude": -71.252685,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-rvrwy",
+      "name": "Riverway",
+      "latitude": 42.331684,
+      "longitude": -71.111931,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-rcmnl",
+      "name": "Roxbury Crossing",
+      "latitude": 42.331397,
+      "longitude": -71.095451,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-rugg",
+      "name": "Ruggles",
+      "latitude": 42.336377,
+      "longitude": -71.088961,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-smary",
+      "name": "Saint Mary's Street",
+      "latitude": 42.345974,
+      "longitude": -71.107353,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-stpul",
+      "name": "Saint Paul Street",
+      "latitude": 42.343327,
+      "longitude": -71.116997,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-shmnl",
+      "name": "Savin Hill",
+      "latitude": 42.31129,
+      "longitude": -71.053331,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-spmnl",
+      "name": "Science Park/West End",
+      "latitude": 42.366664,
+      "longitude": -71.067666,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-smmnl",
+      "name": "Shawmut",
+      "latitude": 42.2931258,
+      "longitude": -71.065738,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-sstat",
+      "name": "South Station",
+      "latitude": 42.352271,
+      "longitude": -71.055242,
+      "municipality": "Boston",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-sougr",
+      "name": "South Street",
+      "latitude": 42.3396,
+      "longitude": -71.157661,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-state",
+      "name": "State",
+      "latitude": 42.358978,
+      "longitude": -71.057598,
+      "municipality": "Boston",
+      "lines": [
+        "Blue",
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-sbmnl",
+      "name": "Stony Brook",
+      "latitude": 42.317062,
+      "longitude": -71.104248,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-sdmnl",
+      "name": "Suffolk Downs",
+      "latitude": 42.3905007,
+      "longitude": -70.9971226,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-sull",
+      "name": "Sullivan Square",
+      "latitude": 42.383975,
+      "longitude": -71.076994,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-sumav",
+      "name": "Summit Avenue",
+      "latitude": 42.34111,
+      "longitude": -71.12561,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-sthld",
+      "name": "Sutherland Road",
+      "latitude": 42.341614,
+      "longitude": -71.146202,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-symcl",
+      "name": "Symphony",
+      "latitude": 42.342687,
+      "longitude": -71.085056,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-tapst",
+      "name": "Tappan Street",
+      "latitude": 42.338459,
+      "longitude": -71.138702,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-tumnl",
+      "name": "Tufts Medical Center",
+      "latitude": 42.349662,
+      "longitude": -71.063917,
+      "municipality": "Boston",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-unsqu",
+      "name": "Union Square",
+      "latitude": 42.377359,
+      "longitude": -71.094761,
+      "municipality": "Somerville",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-valrd",
+      "name": "Valley Road",
+      "latitude": 42.268347,
+      "longitude": -71.081343,
+      "municipality": "Milton",
+      "lines": [
+        "Mattapan"
+      ]
+    },
+    {
+      "id": "place-waban",
+      "name": "Waban",
+      "latitude": 42.325845,
+      "longitude": -71.230609,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-wrnst",
+      "name": "Warren Street",
+      "latitude": 42.348343,
+      "longitude": -71.140457,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-bcnwa",
+      "name": "Washington Square",
+      "latitude": 42.339394,
+      "longitude": -71.13533,
+      "municipality": "Brookline",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-wascm",
+      "name": "Washington Street",
+      "latitude": 42.343864,
+      "longitude": -71.142853,
+      "municipality": "Boston",
+      "lines": [
+        "Green"
+      ]
+    },
+    {
+      "id": "place-welln",
+      "name": "Wellington",
+      "latitude": 42.40237,
+      "longitude": -71.077082,
+      "municipality": "Medford",
+      "lines": [
+        "Orange"
+      ]
+    },
+    {
+      "id": "place-wlsta",
+      "name": "Wollaston",
+      "latitude": 42.2665139,
+      "longitude": -71.0203369,
+      "municipality": "Quincy",
+      "lines": [
+        "Red"
+      ]
+    },
+    {
+      "id": "place-wondl",
+      "name": "Wonderland",
+      "latitude": 42.41342,
+      "longitude": -70.991648,
+      "municipality": "Revere",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-wimnl",
+      "name": "Wood Island",
+      "latitude": 42.3796403,
+      "longitude": -71.0228654,
+      "municipality": "Boston",
+      "lines": [
+        "Blue"
+      ]
+    },
+    {
+      "id": "place-woodl",
+      "name": "Woodland",
+      "latitude": 42.332902,
+      "longitude": -71.243362,
+      "municipality": "Newton",
+      "lines": [
+        "Green"
+      ]
+    }
+  ],
+  "segments": [
+    {
+      "from_station": "place-alfcl",
+      "to_station": "place-davis",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.51,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-davis",
+      "to_station": "place-portr",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-portr",
+      "to_station": "place-harsq",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-harsq",
+      "to_station": "place-cntsq",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 4.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-cntsq",
+      "to_station": "place-knncl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-knncl",
+      "to_station": "place-chmnl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 99
+    },
+    {
+      "from_station": "place-chmnl",
+      "to_station": "place-pktrm",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 98
+    },
+    {
+      "from_station": "place-pktrm",
+      "to_station": "place-dwnxg",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-dwnxg",
+      "to_station": "place-sstat",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 1.18,
+      "minutes_source": "schedule",
+      "samples": 99
+    },
+    {
+      "from_station": "place-sstat",
+      "to_station": "place-brdwy",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-brdwy",
+      "to_station": "place-andrw",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 99
+    },
+    {
+      "from_station": "place-andrw",
+      "to_station": "place-jfk",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.19,
+      "minutes_source": "schedule",
+      "samples": 97
+    },
+    {
+      "from_station": "place-jfk",
+      "to_station": "place-nqncy",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 6.51,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-nqncy",
+      "to_station": "place-wlsta",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-wlsta",
+      "to_station": "place-qnctr",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 48
+    },
+    {
+      "from_station": "place-qnctr",
+      "to_station": "place-qamnl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-qamnl",
+      "to_station": "place-brntn",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.51,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-jfk",
+      "to_station": "place-shmnl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-shmnl",
+      "to_station": "place-fldcr",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 48
+    },
+    {
+      "from_station": "place-fldcr",
+      "to_station": "place-smmnl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 50
+    },
+    {
+      "from_station": "place-smmnl",
+      "to_station": "place-asmnl",
+      "line": "Red",
+      "routes": [
+        "Red"
+      ],
+      "minutes": 1.63,
+      "minutes_source": "schedule",
+      "samples": 49
+    },
+    {
+      "from_station": "place-asmnl",
+      "to_station": "place-cedgr",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-cedgr",
+      "to_station": "place-butlr",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-butlr",
+      "to_station": "place-miltt",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 54
+    },
+    {
+      "from_station": "place-miltt",
+      "to_station": "place-cenav",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 1.51,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-cenav",
+      "to_station": "place-valrd",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-valrd",
+      "to_station": "place-capst",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-capst",
+      "to_station": "place-matt",
+      "line": "Mattapan",
+      "routes": [
+        "Mattapan"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 53
+    },
+    {
+      "from_station": "place-ogmnl",
+      "to_station": "place-mlmnl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.02,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-mlmnl",
+      "to_station": "place-welln",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-welln",
+      "to_station": "place-astao",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-astao",
+      "to_station": "place-sull",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-sull",
+      "to_station": "place-ccmnl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-ccmnl",
+      "to_station": "place-north",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-north",
+      "to_station": "place-haecl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-haecl",
+      "to_station": "place-state",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.49,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-state",
+      "to_station": "place-dwnxg",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.76,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-dwnxg",
+      "to_station": "place-chncl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-chncl",
+      "to_station": "place-tumnl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-tumnl",
+      "to_station": "place-bbsta",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-bbsta",
+      "to_station": "place-masta",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-masta",
+      "to_station": "place-rugg",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-rugg",
+      "to_station": "place-rcmnl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-rcmnl",
+      "to_station": "place-jaksn",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-jaksn",
+      "to_station": "place-sbmnl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-sbmnl",
+      "to_station": "place-grnst",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 82
+    },
+    {
+      "from_station": "place-grnst",
+      "to_station": "place-forhl",
+      "line": "Orange",
+      "routes": [
+        "Orange"
+      ],
+      "minutes": 1.49,
+      "minutes_source": "schedule",
+      "samples": 81
+    },
+    {
+      "from_station": "place-gover",
+      "to_station": "place-pktrm",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.59,
+      "minutes_source": "schedule",
+      "samples": 234
+    },
+    {
+      "from_station": "place-pktrm",
+      "to_station": "place-boyls",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.2,
+      "minutes_source": "schedule",
+      "samples": 235
+    },
+    {
+      "from_station": "place-boyls",
+      "to_station": "place-armnl",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.77,
+      "minutes_source": "schedule",
+      "samples": 236
+    },
+    {
+      "from_station": "place-armnl",
+      "to_station": "place-coecl",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 238
+    },
+    {
+      "from_station": "place-coecl",
+      "to_station": "place-hymnl",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D"
+      ],
+      "minutes": 2.84,
+      "minutes_source": "schedule",
+      "samples": 174
+    },
+    {
+      "from_station": "place-hymnl",
+      "to_station": "place-kencl",
+      "line": "Green",
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 176
+    },
+    {
+      "from_station": "place-kencl",
+      "to_station": "place-bland",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-bland",
+      "to_station": "place-buest",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-buest",
+      "to_station": "place-bucen",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-bucen",
+      "to_station": "place-amory",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 3.95,
+      "minutes_source": "schedule",
+      "samples": 57
+    },
+    {
+      "from_station": "place-amory",
+      "to_station": "place-babck",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-babck",
+      "to_station": "place-brico",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-brico",
+      "to_station": "place-harvd",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.95,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-harvd",
+      "to_station": "place-grigg",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.05,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-grigg",
+      "to_station": "place-alsgr",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-alsgr",
+      "to_station": "place-wrnst",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-wrnst",
+      "to_station": "place-wascm",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.93,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-wascm",
+      "to_station": "place-sthld",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-sthld",
+      "to_station": "place-chswk",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.07,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-chswk",
+      "to_station": "place-chill",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.92,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-chill",
+      "to_station": "place-sougr",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-sougr",
+      "to_station": "place-lake",
+      "line": "Green",
+      "routes": [
+        "Green-B"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-kencl",
+      "to_station": "place-smary",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 3.37,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-smary",
+      "to_station": "place-hwsst",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-hwsst",
+      "to_station": "place-kntst",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.12,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-kntst",
+      "to_station": "place-stpul",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.45,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-stpul",
+      "to_station": "place-cool",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 2.12,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-cool",
+      "to_station": "place-sumav",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.49,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-sumav",
+      "to_station": "place-bndhl",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-bndhl",
+      "to_station": "place-fbkst",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-fbkst",
+      "to_station": "place-bcnwa",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-bcnwa",
+      "to_station": "place-tapst",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-tapst",
+      "to_station": "place-denrd",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.07,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-denrd",
+      "to_station": "place-engav",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.95,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-engav",
+      "to_station": "place-clmnl",
+      "line": "Green",
+      "routes": [
+        "Green-C"
+      ],
+      "minutes": 1.05,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-unsqu",
+      "to_station": "place-lech",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 6.0,
+      "minutes_source": "schedule",
+      "samples": 56
+    },
+    {
+      "from_station": "place-lech",
+      "to_station": "place-spmnl",
+      "line": "Green",
+      "routes": [
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 119
+    },
+    {
+      "from_station": "place-spmnl",
+      "to_station": "place-north",
+      "line": "Green",
+      "routes": [
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 4.0,
+      "minutes_source": "schedule",
+      "samples": 115
+    },
+    {
+      "from_station": "place-north",
+      "to_station": "place-haecl",
+      "line": "Green",
+      "routes": [
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 119
+    },
+    {
+      "from_station": "place-haecl",
+      "to_station": "place-gover",
+      "line": "Green",
+      "routes": [
+        "Green-D",
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 118
+    },
+    {
+      "from_station": "place-kencl",
+      "to_station": "place-fenwy",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 3.74,
+      "minutes_source": "schedule",
+      "samples": 57
+    },
+    {
+      "from_station": "place-fenwy",
+      "to_station": "place-longw",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-longw",
+      "to_station": "place-bvmnl",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-bvmnl",
+      "to_station": "place-brkhl",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.24,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-brkhl",
+      "to_station": "place-bcnfd",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-bcnfd",
+      "to_station": "place-rsmnl",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-rsmnl",
+      "to_station": "place-chhil",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-chhil",
+      "to_station": "place-newto",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 4.0,
+      "minutes_source": "schedule",
+      "samples": 57
+    },
+    {
+      "from_station": "place-newto",
+      "to_station": "place-newtn",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.5,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-newtn",
+      "to_station": "place-eliot",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-eliot",
+      "to_station": "place-waban",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.51,
+      "minutes_source": "schedule",
+      "samples": 57
+    },
+    {
+      "from_station": "place-waban",
+      "to_station": "place-woodl",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 2.5,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-woodl",
+      "to_station": "place-river",
+      "line": "Green",
+      "routes": [
+        "Green-D"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 58
+    },
+    {
+      "from_station": "place-mdftf",
+      "to_station": "place-balsq",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.5,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-balsq",
+      "to_station": "place-mgngl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-mgngl",
+      "to_station": "place-gilmn",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-gilmn",
+      "to_station": "place-esomr",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.3,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-esomr",
+      "to_station": "place-lech",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 4.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-coecl",
+      "to_station": "place-prmnl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.18,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-prmnl",
+      "to_station": "place-symcl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-symcl",
+      "to_station": "place-nuniv",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-nuniv",
+      "to_station": "place-mfa",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 59
+    },
+    {
+      "from_station": "place-mfa",
+      "to_station": "place-lngmd",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 3.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-lngmd",
+      "to_station": "place-brmnl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-brmnl",
+      "to_station": "place-fenwd",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-fenwd",
+      "to_station": "place-mispk",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-mispk",
+      "to_station": "place-rvrwy",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 1.82,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-rvrwy",
+      "to_station": "place-bckhl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 1.2,
+      "minutes_source": "schedule",
+      "samples": 61
+    },
+    {
+      "from_station": "place-bckhl",
+      "to_station": "place-hsmnl",
+      "line": "Green",
+      "routes": [
+        "Green-E"
+      ],
+      "minutes": 1.8,
+      "minutes_source": "schedule",
+      "samples": 60
+    },
+    {
+      "from_station": "place-wondl",
+      "to_station": "place-rbmnl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 1.49,
+      "minutes_source": "schedule",
+      "samples": 75
+    },
+    {
+      "from_station": "place-rbmnl",
+      "to_station": "place-bmmnl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 74
+    },
+    {
+      "from_station": "place-bmmnl",
+      "to_station": "place-sdmnl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 1.48,
+      "minutes_source": "schedule",
+      "samples": 75
+    },
+    {
+      "from_station": "place-sdmnl",
+      "to_station": "place-orhte",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 75
+    },
+    {
+      "from_station": "place-orhte",
+      "to_station": "place-wimnl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 76
+    },
+    {
+      "from_station": "place-wimnl",
+      "to_station": "place-aport",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 76
+    },
+    {
+      "from_station": "place-aport",
+      "to_station": "place-mvbcl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.0,
+      "minutes_source": "schedule",
+      "samples": 75
+    },
+    {
+      "from_station": "place-mvbcl",
+      "to_station": "place-aqucl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 2.5,
+      "minutes_source": "schedule",
+      "samples": 76
+    },
+    {
+      "from_station": "place-aqucl",
+      "to_station": "place-state",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 1.0,
+      "minutes_source": "schedule",
+      "samples": 77
+    },
+    {
+      "from_station": "place-state",
+      "to_station": "place-gover",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 76
+    },
+    {
+      "from_station": "place-gover",
+      "to_station": "place-bomnl",
+      "line": "Blue",
+      "routes": [
+        "Blue"
+      ],
+      "minutes": 1.5,
+      "minutes_source": "schedule",
+      "samples": 76
+    }
+  ],
+  "platform_to_station": {
+    "70095": "place-jfk",
+    "70047": "place-aport",
+    "70073": "place-chmnl",
+    "70223": "place-sumav",
+    "70267": "place-miltt",
+    "70501": "place-lech",
+    "70206": "place-north",
+    "70013": "place-masta",
+    "71151": "place-kencl",
+    "70042": "place-state",
+    "70248": "place-lngmd",
+    "70001": "place-forhl",
+    "70247": "place-lngmd",
+    "70083": "place-andrw",
+    "70212": "place-smary",
+    "70200": "place-pktrm",
+    "70166": "place-eliot",
+    "70231": "place-tapst",
+    "70097": "place-nqncy",
+    "70217": "place-stpul",
+    "70036": "place-ogmnl",
+    "70110": "place-sougr",
+    "70265": "place-butlr",
+    "70084": "place-andrw",
+    "70274": "place-capst",
+    "70186": "place-fenwy",
+    "70154": "place-coecl",
+    "70113": "place-chill",
+    "70128": "place-grigg",
+    "70269": "place-cenav",
+    "70134": "place-brico",
+    "70502": "place-lech",
+    "70152": "place-hymnl",
+    "70273": "place-capst",
+    "70229": "place-bcnwa",
+    "70027": "place-north",
+    "70226": "place-bndhl",
+    "70111": "place-sougr",
+    "70153": "place-hymnl",
+    "70043": "place-aqucl",
+    "70270": "place-cenav",
+    "70163": "place-woodl",
+    "70098": "place-nqncy",
+    "70009": "place-rcmnl",
+    "70258": "place-bckhl",
+    "70205": "place-north",
+    "70045": "place-mvbcl",
+    "70029": "place-ccmnl",
+    "70094": "place-asmnl",
+    "70179": "place-brkhl",
+    "70057": "place-rbmnl",
+    "70278": "place-astao",
+    "70056": "place-bmmnl",
+    "70197": "place-pktrm",
+    "70271": "place-valrd",
+    "70512": "place-mdftf",
+    "70246": "place-mfa",
+    "70103": "place-qamnl",
+    "70065": "place-portr",
+    "70513": "place-esomr",
+    "70021": "place-dwnxg",
+    "70031": "place-sull",
+    "70239": "place-prmnl",
+    "70266": "place-butlr",
+    "70161": "place-river",
+    "70213": "place-hwsst",
+    "70225": "place-bndhl",
+    "70279": "place-astao",
+    "70022": "place-state",
+    "70147": "place-buest",
+    "70089": "place-fldcr",
+    "70040": "place-gover",
+    "70264": "place-cedgr",
+    "70510": "place-balsq",
+    "70151": "place-kencl",
+    "70204": "place-haecl",
+    "70187": "place-fenwy",
+    "70034": "place-mlmnl",
+    "70017": "place-tumnl",
+    "70023": "place-state",
+    "70127": "place-alsgr",
+    "70250": "place-brmnl",
+    "70182": "place-longw",
+    "70203": "place-haecl",
+    "70010": "place-rugg",
+    "70081": "place-brdwy",
+    "70041": "place-state",
+    "70006": "place-jaksn",
+    "70506": "place-gilmn",
+    "70253": "place-mispk",
+    "70244": "place-nuniv",
+    "70238": "place-clmnl",
+    "70181": "place-bvmnl",
+    "70216": "place-kntst",
+    "70508": "place-mgngl",
+    "70093": "place-asmnl",
+    "70165": "place-waban",
+    "70067": "place-harsq",
+    "70088": "place-shmnl",
+    "70116": "place-sthld",
+    "70131": "place-harvd",
+    "70503": "place-unsqu",
+    "70063": "place-davis",
+    "70507": "place-mgngl",
+    "70120": "place-wascm",
+    "70174": "place-rsmnl",
+    "70035": "place-mlmnl",
+    "70115": "place-chswk",
+    "70072": "place-knncl",
+    "70173": "place-chhil",
+    "70091": "place-smmnl",
+    "70251": "place-fenwd",
+    "70263": "place-cedgr",
+    "70020": "place-dwnxg",
+    "70177": "place-bcnfd",
+    "70121": "place-wascm",
+    "70060": "place-wondl",
+    "70249": "place-brmnl",
+    "70170": "place-newto",
+    "70059": "place-wondl",
+    "70135": "place-brico",
+    "70061": "place-alfcl",
+    "70157": "place-armnl",
+    "70224": "place-sumav",
+    "70504": "place-unsqu",
+    "70024": "place-haecl",
+    "70032": "place-welln",
+    "70039": "place-gover",
+    "70230": "place-bcnwa",
+    "70101": "place-qnctr",
+    "70077": "place-dwnxg",
+    "70207": "place-spmnl",
+    "70159": "place-boyls",
+    "70102": "place-qnctr",
+    "70233": "place-denrd",
+    "70155": "place-coecl",
+    "70096": "place-jfk",
+    "70144": "place-bucen",
+    "70268": "place-miltt",
+    "70218": "place-stpul",
+    "70242": "place-symcl",
+    "70090": "place-fldcr",
+    "70129": "place-grigg",
+    "70025": "place-haecl",
+    "70112": "place-chill",
+    "70176": "place-bcnfd",
+    "70078": "place-dwnxg",
+    "70150": "place-kencl",
+    "70202": "place-gover",
+    "70038": "place-bomnl",
+    "70235": "place-engav",
+    "70160": "place-river",
+    "70276": "place-matt",
+    "70162": "place-woodl",
+    "70030": "place-sull",
+    "70243": "place-nuniv",
+    "70275": "place-matt",
+    "70196": "place-pktrm",
+    "70087": "place-shmnl",
+    "70272": "place-valrd",
+    "70511": "place-mdftf",
+    "70164": "place-waban",
+    "170140": "place-amory",
+    "70050": "place-wimnl",
+    "70175": "place-rsmnl",
+    "70028": "place-ccmnl",
+    "70019": "place-chncl",
+    "70149": "place-bland",
+    "70053": "place-sdmnl",
+    "70105": "place-brntn",
+    "70236": "place-engav",
+    "70007": "place-jaksn",
+    "70070": "place-cntsq",
+    "70058": "place-rbmnl",
+    "70002": "place-grnst",
+    "70055": "place-bmmnl",
+    "70261": "place-asmnl",
+    "70107": "place-lake",
+    "70099": "place-wlsta",
+    "170137": "place-babck",
+    "70838": "place-bomnl",
+    "170136": "place-babck",
+    "70509": "place-balsq",
+    "70080": "place-sstat",
+    "70514": "place-esomr",
+    "70199": "place-pktrm",
+    "70085": "place-jfk",
+    "70071": "place-knncl",
+    "70145": "place-bucen",
+    "70016": "place-tumnl",
+    "70167": "place-eliot",
+    "70146": "place-buest",
+    "70052": "place-orhte",
+    "70260": "place-hsmnl",
+    "70079": "place-sstat",
+    "70172": "place-chhil",
+    "70219": "place-cool",
+    "70505": "place-gilmn",
+    "70148": "place-bland",
+    "70086": "place-jfk",
+    "70011": "place-rugg",
+    "70240": "place-prmnl",
+    "70254": "place-mispk",
+    "70156": "place-armnl",
+    "70245": "place-mfa",
+    "70106": "place-lake",
+    "70018": "place-chncl",
+    "70124": "place-wrnst",
+    "70126": "place-alsgr",
+    "70168": "place-newtn",
+    "70044": "place-aqucl",
+    "70241": "place-symcl",
+    "71150": "place-kencl",
+    "70104": "place-qamnl",
+    "70046": "place-mvbcl",
+    "70257": "place-bckhl",
+    "70014": "place-bbsta",
+    "70033": "place-welln",
+    "70051": "place-orhte",
+    "70178": "place-brkhl",
+    "70130": "place-harvd",
+    "70068": "place-harsq",
+    "70169": "place-newtn",
+    "70234": "place-denrd",
+    "70012": "place-masta",
+    "70211": "place-smary",
+    "70048": "place-aport",
+    "70066": "place-portr",
+    "70114": "place-chswk",
+    "70220": "place-cool",
+    "70015": "place-bbsta",
+    "70183": "place-longw",
+    "70256": "place-rvrwy",
+    "70064": "place-davis",
+    "70100": "place-wlsta",
+    "70201": "place-gover",
+    "70125": "place-wrnst",
+    "70092": "place-smmnl",
+    "70215": "place-kntst",
+    "70054": "place-sdmnl",
+    "70005": "place-sbmnl",
+    "70003": "place-grnst",
+    "70208": "place-spmnl",
+    "70117": "place-sthld",
+    "70004": "place-sbmnl",
+    "70008": "place-rcmnl",
+    "70198": "place-pktrm",
+    "70075": "place-pktrm",
+    "70026": "place-north",
+    "70082": "place-brdwy",
+    "70069": "place-cntsq",
+    "70214": "place-hwsst",
+    "70180": "place-bvmnl",
+    "70252": "place-fenwd",
+    "70074": "place-chmnl",
+    "170141": "place-amory",
+    "70232": "place-tapst",
+    "70255": "place-rvrwy",
+    "70076": "place-pktrm",
+    "70049": "place-wimnl",
+    "70237": "place-clmnl",
+    "70171": "place-newto",
+    "70228": "place-fbkst",
+    "70227": "place-fbkst",
+    "70158": "place-boyls"
+  }
+}
